@@ -165,7 +165,7 @@ ln -s "$(pwd)/storage/app/public/modules" public/media
 ```cmd
 $ php artisan serve
 ```
-#### Start your Octane development by typing:
+#### (Optional) Start your Octane development by typing if you want:
 ```cmd
 $ php artisan octane:start
 ```
