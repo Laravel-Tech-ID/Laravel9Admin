@@ -4,8 +4,8 @@
 
 </p>
 
-## About Laravel 8 Admin
-Laravel 8 Admin is a starter pack for developing laravel application. This application contain minimum spesification for an application.
+## About Laravel 9 Admin
+Laravel 9 Admin is a starter pack for developing laravel application. This application contain minimum spesification for an application.
 
 ## Features:
 1. User Management
@@ -44,6 +44,14 @@ Docker Ready
 ```cmd
 git clone https://github.com/Laravel-Tech-ID/Laravel9Admin.git
 ```
+#### Change directory to Laravel9Admin:
+```cmd
+cd Laravel9Admin
+```
+#### Open Code Editor (Visual Studio Code):
+```cmd
+code .
+```
 #### Comment out line 37 to 41 on file Modules\Access\Providers\RoleAccessServiceProvider.php on boot function to be like this:
 ```php
 public function boot()
@@ -70,7 +78,6 @@ composer install
 sudo -i -u postgres
 psql
 ```
-CREATE DATABASE dbname;
 #### Set Postgres Password (If never):
 ```cmd
 ALTER USER postgres PASSWORD 'root';
