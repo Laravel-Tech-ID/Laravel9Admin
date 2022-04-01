@@ -42,8 +42,13 @@ Docker Ready
 ## Installation
 #### Clone the file to your local by typing below command:
 ```cmd
-git clone https://github.com/Laravel-Tech-ID/Laravel8Admin.git
+git clone https://github.com/Laravel-Tech-ID/Laravel9Admin.git
 ```
+#### Install Composer Dependencies:
+```cmd
+composer install
+```
+
 #### Create Database and put the config on .env file like below:
 ```
 DB_CONNECTION=pgsql
