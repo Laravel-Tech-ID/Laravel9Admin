@@ -1,0 +1,158 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 02/06/2020 06:27
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-two-test-tubes:before { content: "\f100"; }
+.flaticon-three-books:before { content: "\f101"; }
+.flaticon-ruler-and-set-square:before { content: "\f102"; }
+.flaticon-scientific-calculator-machine:before { content: "\f103"; }
+.flaticon-school-bus-front:before { content: "\f104"; }
+.flaticon-teacher-teaching-maths:before { content: "\f105"; }
+.flaticon-graduated-student-avatar:before { content: "\f106"; }
+.flaticon-student-reading:before { content: "\f107"; }
+.flaticon-closed-notebook-and-pen:before { content: "\f108"; }
+.flaticon-children-backpack:before { content: "\f109"; }
+.flaticon-science:before { content: "\f10a"; }
+.flaticon-atom:before { content: "\f10b"; }
+.flaticon-bacteria:before { content: "\f10c"; }
+.flaticon-biology:before { content: "\f10d"; }
+.flaticon-graph:before { content: "\f10e"; }
+.flaticon-calculator:before { content: "\f10f"; }
+.flaticon-planet:before { content: "\f110"; }
+.flaticon-microscope:before { content: "\f111"; }
+.flaticon-book:before { content: "\f112"; }
+.flaticon-molecular:before { content: "\f113"; }
+.flaticon-compass:before { content: "\f114"; }
+.flaticon-engineering:before { content: "\f115"; }
+.flaticon-scientist:before { content: "\f116"; }
+.flaticon-space:before { content: "\f117"; }
+.flaticon-earth:before { content: "\f118"; }
+.flaticon-clock:before { content: "\f119"; }
+.flaticon-contract:before { content: "\f11a"; }
+.flaticon-document:before { content: "\f11b"; }
+.flaticon-cut:before { content: "\f11c"; }
+.flaticon-test:before { content: "\f11d"; }
+.flaticon-girl:before { content: "\f11e"; }
+.flaticon-watercolor:before { content: "\f11f"; }
+.flaticon-violin:before { content: "\f120"; }
+.flaticon-ebook:before { content: "\f121"; }
+.flaticon-classroom:before { content: "\f122"; }
+.flaticon-school:before { content: "\f123"; }
+.flaticon-homework:before { content: "\f124"; }
+.flaticon-water:before { content: "\f125"; }
+.flaticon-championship:before { content: "\f126"; }
+.flaticon-laboratory:before { content: "\f127"; }
+.flaticon-ruler:before { content: "\f128"; }
+.flaticon-pencil:before { content: "\f129"; }
+.flaticon-backpack:before { content: "\f12a"; }
+.flaticon-hour:before { content: "\f12b"; }
+.flaticon-soccer:before { content: "\f12c"; }
+.flaticon-mortarboard:before { content: "\f12d"; }
+.flaticon-ebook-1:before { content: "\f12e"; }
+.flaticon-rule:before { content: "\f12f"; }
+.flaticon-support:before { content: "\f130"; }
+.flaticon-marker:before { content: "\f131"; }
+.flaticon-crayon:before { content: "\f132"; }
+.flaticon-calculator-1:before { content: "\f133"; }
+.flaticon-chess:before { content: "\f134"; }
+.flaticon-owl:before { content: "\f135"; }
+.flaticon-chalk:before { content: "\f136"; }
+.flaticon-saw:before { content: "\f137"; }
+.flaticon-basketball:before { content: "\f138"; }
+.flaticon-notebook:before { content: "\f139"; }
+.flaticon-mortarboard-1:before { content: "\f13a"; }
+    
+    $font-Flaticon-two-test-tubes: "\f100";
+    $font-Flaticon-three-books: "\f101";
+    $font-Flaticon-ruler-and-set-square: "\f102";
+    $font-Flaticon-scientific-calculator-machine: "\f103";
+    $font-Flaticon-school-bus-front: "\f104";
+    $font-Flaticon-teacher-teaching-maths: "\f105";
+    $font-Flaticon-graduated-student-avatar: "\f106";
+    $font-Flaticon-student-reading: "\f107";
+    $font-Flaticon-closed-notebook-and-pen: "\f108";
+    $font-Flaticon-children-backpack: "\f109";
+    $font-Flaticon-science: "\f10a";
+    $font-Flaticon-atom: "\f10b";
+    $font-Flaticon-bacteria: "\f10c";
+    $font-Flaticon-biology: "\f10d";
+    $font-Flaticon-graph: "\f10e";
+    $font-Flaticon-calculator: "\f10f";
+    $font-Flaticon-planet: "\f110";
+    $font-Flaticon-microscope: "\f111";
+    $font-Flaticon-book: "\f112";
+    $font-Flaticon-molecular: "\f113";
+    $font-Flaticon-compass: "\f114";
+    $font-Flaticon-engineering: "\f115";
+    $font-Flaticon-scientist: "\f116";
+    $font-Flaticon-space: "\f117";
+    $font-Flaticon-earth: "\f118";
+    $font-Flaticon-clock: "\f119";
+    $font-Flaticon-contract: "\f11a";
+    $font-Flaticon-document: "\f11b";
+    $font-Flaticon-cut: "\f11c";
+    $font-Flaticon-test: "\f11d";
+    $font-Flaticon-girl: "\f11e";
+    $font-Flaticon-watercolor: "\f11f";
+    $font-Flaticon-violin: "\f120";
+    $font-Flaticon-ebook: "\f121";
+    $font-Flaticon-classroom: "\f122";
+    $font-Flaticon-school: "\f123";
+    $font-Flaticon-homework: "\f124";
+    $font-Flaticon-water: "\f125";
+    $font-Flaticon-championship: "\f126";
+    $font-Flaticon-laboratory: "\f127";
+    $font-Flaticon-ruler: "\f128";
+    $font-Flaticon-pencil: "\f129";
+    $font-Flaticon-backpack: "\f12a";
+    $font-Flaticon-hour: "\f12b";
+    $font-Flaticon-soccer: "\f12c";
+    $font-Flaticon-mortarboard: "\f12d";
+    $font-Flaticon-ebook-1: "\f12e";
+    $font-Flaticon-rule: "\f12f";
+    $font-Flaticon-support: "\f130";
+    $font-Flaticon-marker: "\f131";
+    $font-Flaticon-crayon: "\f132";
+    $font-Flaticon-calculator-1: "\f133";
+    $font-Flaticon-chess: "\f134";
+    $font-Flaticon-owl: "\f135";
+    $font-Flaticon-chalk: "\f136";
+    $font-Flaticon-saw: "\f137";
+    $font-Flaticon-basketball: "\f138";
+    $font-Flaticon-notebook: "\f139";
+    $font-Flaticon-mortarboard-1: "\f13a";

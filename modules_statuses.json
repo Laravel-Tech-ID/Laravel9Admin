@@ -1,0 +1,8 @@
+{
+    "Access": true,
+    "Auth": true,
+    "Dashboard": true,
+    "File": true,
+    "Profile": true,
+    "Setting": true
+}

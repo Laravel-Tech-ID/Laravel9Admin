@@ -1,0 +1,84 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 07/08/2019 10:37
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-boiler:before { content: "\f100"; }
+.flaticon-conveyor:before { content: "\f101"; }
+.flaticon-pint-of-beer:before { content: "\f102"; }
+.flaticon-beer-keg:before { content: "\f103"; }
+.flaticon-beer:before { content: "\f104"; }
+.flaticon-brewing:before { content: "\f105"; }
+.flaticon-brewing-1:before { content: "\f106"; }
+.flaticon-malt:before { content: "\f107"; }
+.flaticon-distillation:before { content: "\f108"; }
+.flaticon-brewing-2:before { content: "\f109"; }
+.flaticon-barrels:before { content: "\f10a"; }
+.flaticon-barrels-1:before { content: "\f10b"; }
+.flaticon-press:before { content: "\f10c"; }
+.flaticon-brewing-3:before { content: "\f10d"; }
+.flaticon-beer-keg-1:before { content: "\f10e"; }
+.flaticon-test-tube:before { content: "\f10f"; }
+.flaticon-grinder:before { content: "\f110"; }
+.flaticon-still:before { content: "\f111"; }
+.flaticon-malt-1:before { content: "\f112"; }
+.flaticon-brewing-4:before { content: "\f113"; }
+.flaticon-brewing-5:before { content: "\f114"; }
+.flaticon-beer-1:before { content: "\f115"; }
+    
+    $font-Flaticon-boiler: "\f100";
+    $font-Flaticon-conveyor: "\f101";
+    $font-Flaticon-pint-of-beer: "\f102";
+    $font-Flaticon-beer-keg: "\f103";
+    $font-Flaticon-beer: "\f104";
+    $font-Flaticon-brewing: "\f105";
+    $font-Flaticon-brewing-1: "\f106";
+    $font-Flaticon-malt: "\f107";
+    $font-Flaticon-distillation: "\f108";
+    $font-Flaticon-brewing-2: "\f109";
+    $font-Flaticon-barrels: "\f10a";
+    $font-Flaticon-barrels-1: "\f10b";
+    $font-Flaticon-press: "\f10c";
+    $font-Flaticon-brewing-3: "\f10d";
+    $font-Flaticon-beer-keg-1: "\f10e";
+    $font-Flaticon-test-tube: "\f10f";
+    $font-Flaticon-grinder: "\f110";
+    $font-Flaticon-still: "\f111";
+    $font-Flaticon-malt-1: "\f112";
+    $font-Flaticon-brewing-4: "\f113";
+    $font-Flaticon-brewing-5: "\f114";
+    $font-Flaticon-beer-1: "\f115";

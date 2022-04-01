@@ -1,0 +1,142 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 15/04/2019 10:02
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-pacifier:before { content: "\f100"; }
+.flaticon-boy:before { content: "\f101"; }
+.flaticon-book:before { content: "\f102"; }
+.flaticon-feeding-bottle:before { content: "\f103"; }
+.flaticon-puzzle:before { content: "\f104"; }
+.flaticon-baby-stroller:before { content: "\f105"; }
+.flaticon-bricks:before { content: "\f106"; }
+.flaticon-playground:before { content: "\f107"; }
+.flaticon-kite:before { content: "\f108"; }
+.flaticon-diaper:before { content: "\f109"; }
+.flaticon-ball:before { content: "\f10a"; }
+.flaticon-swing:before { content: "\f10b"; }
+.flaticon-girl:before { content: "\f10c"; }
+.flaticon-swing-1:before { content: "\f10d"; }
+.flaticon-backpack:before { content: "\f10e"; }
+.flaticon-car:before { content: "\f10f"; }
+.flaticon-pencil:before { content: "\f110"; }
+.flaticon-gun:before { content: "\f111"; }
+.flaticon-baby-stroller-1:before { content: "\f112"; }
+.flaticon-castle:before { content: "\f113"; }
+.flaticon-group:before { content: "\f114"; }
+.flaticon-figures:before { content: "\f115"; }
+.flaticon-bricks-1:before { content: "\f116"; }
+.flaticon-board:before { content: "\f117"; }
+.flaticon-kindergarten:before { content: "\f118"; }
+.flaticon-ice-cream:before { content: "\f119"; }
+.flaticon-bike:before { content: "\f11a"; }
+.flaticon-abacus:before { content: "\f11b"; }
+.flaticon-rattle:before { content: "\f11c"; }
+.flaticon-cot:before { content: "\f11d"; }
+.flaticon-top:before { content: "\f11e"; }
+.flaticon-horse:before { content: "\f11f"; }
+.flaticon-constructor:before { content: "\f120"; }
+.flaticon-balloons:before { content: "\f121"; }
+.flaticon-shovel:before { content: "\f122"; }
+.flaticon-lodge:before { content: "\f123"; }
+.flaticon-bell:before { content: "\f124"; }
+.flaticon-ship:before { content: "\f125"; }
+.flaticon-sandals:before { content: "\f126"; }
+.flaticon-bus:before { content: "\f127"; }
+.flaticon-pencils:before { content: "\f128"; }
+.flaticon-potty:before { content: "\f129"; }
+.flaticon-locker:before { content: "\f12a"; }
+.flaticon-lunch:before { content: "\f12b"; }
+.flaticon-cutlery:before { content: "\f12c"; }
+.flaticon-playground-1:before { content: "\f12d"; }
+.flaticon-playground-2:before { content: "\f12e"; }
+.flaticon-bicycle:before { content: "\f12f"; }
+.flaticon-sweets:before { content: "\f130"; }
+.flaticon-breakfast:before { content: "\f131"; }
+.flaticon-xylophone:before { content: "\f132"; }
+    
+    $font-Flaticon-pacifier: "\f100";
+    $font-Flaticon-boy: "\f101";
+    $font-Flaticon-book: "\f102";
+    $font-Flaticon-feeding-bottle: "\f103";
+    $font-Flaticon-puzzle: "\f104";
+    $font-Flaticon-baby-stroller: "\f105";
+    $font-Flaticon-bricks: "\f106";
+    $font-Flaticon-playground: "\f107";
+    $font-Flaticon-kite: "\f108";
+    $font-Flaticon-diaper: "\f109";
+    $font-Flaticon-ball: "\f10a";
+    $font-Flaticon-swing: "\f10b";
+    $font-Flaticon-girl: "\f10c";
+    $font-Flaticon-swing-1: "\f10d";
+    $font-Flaticon-backpack: "\f10e";
+    $font-Flaticon-car: "\f10f";
+    $font-Flaticon-pencil: "\f110";
+    $font-Flaticon-gun: "\f111";
+    $font-Flaticon-baby-stroller-1: "\f112";
+    $font-Flaticon-castle: "\f113";
+    $font-Flaticon-group: "\f114";
+    $font-Flaticon-figures: "\f115";
+    $font-Flaticon-bricks-1: "\f116";
+    $font-Flaticon-board: "\f117";
+    $font-Flaticon-kindergarten: "\f118";
+    $font-Flaticon-ice-cream: "\f119";
+    $font-Flaticon-bike: "\f11a";
+    $font-Flaticon-abacus: "\f11b";
+    $font-Flaticon-rattle: "\f11c";
+    $font-Flaticon-cot: "\f11d";
+    $font-Flaticon-top: "\f11e";
+    $font-Flaticon-horse: "\f11f";
+    $font-Flaticon-constructor: "\f120";
+    $font-Flaticon-balloons: "\f121";
+    $font-Flaticon-shovel: "\f122";
+    $font-Flaticon-lodge: "\f123";
+    $font-Flaticon-bell: "\f124";
+    $font-Flaticon-ship: "\f125";
+    $font-Flaticon-sandals: "\f126";
+    $font-Flaticon-bus: "\f127";
+    $font-Flaticon-pencils: "\f128";
+    $font-Flaticon-potty: "\f129";
+    $font-Flaticon-locker: "\f12a";
+    $font-Flaticon-lunch: "\f12b";
+    $font-Flaticon-cutlery: "\f12c";
+    $font-Flaticon-playground-1: "\f12d";
+    $font-Flaticon-playground-2: "\f12e";
+    $font-Flaticon-bicycle: "\f12f";
+    $font-Flaticon-sweets: "\f130";
+    $font-Flaticon-breakfast: "\f131";
+    $font-Flaticon-xylophone: "\f132";
