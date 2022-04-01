@@ -159,7 +159,10 @@ For Octane Deployment on Nginx, please refer to this documentation:
 #### For Docker Deployment please read documentation below:
 <a href="https://github.com/Laravel-Tech-ID/laravel-octane-dockerfile">Docker Deployment</a>
 
-
+#### Generate Laravel Key:
+```cmd
+php artisan key:generate
+```
 #### Login to Application by below credential:
 ```cmd
 Username: admin@admin.com
