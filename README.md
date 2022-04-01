@@ -120,10 +120,6 @@ Migrated:  2020_12_17_163206_create_roles_accesses_table (241.31ms)
 Migrating: 2020_12_17_163217_create_users_accesses_table
 Migrated:  2020_12_17_163217_create_users_accesses_table (244.30ms)
 ```
-#### Change Module Active to Access Module by typing below command:
-```cmd
-$ php artisan module:use Access
-```
 #### Seed Database by typing below command:
 ```cmd
 $ php artisan module:seed
