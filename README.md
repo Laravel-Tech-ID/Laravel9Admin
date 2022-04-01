@@ -44,23 +44,7 @@ Docker Ready
 ```cmd
 git clone https://github.com/Laravel-Tech-ID/Laravel9Admin.git
 ```
-#### Install Composer Dependencies:
-```cmd
-composer install
-```
-
-#### Create Database and put the config on .env file like below:
-```
-DB_CONNECTION=pgsql
-DB_HOST=127.0.0.1
-<!-- DB_SOCKET=/var/run/mysqld/mysqld.sock -->
-DB_PORT=5432
-DB_DATABASE=laravel9admin
-DB_USERNAME=postgres
-DB_PASSWORD=root
-
-```
-#### Comment out line 34 to 38 on file Modules\Access\Providers\RoleAccessServiceProvider.php on boot function to be like this:
+#### Comment out line 37 to 41 on file Modules\Access\Providers\RoleAccessServiceProvider.php on boot function to be like this:
 ```php
 public function boot()
 {
@@ -77,6 +61,39 @@ public function boot()
     //-------------------------------------//
     ...
 ```
+#### Install Composer Dependencies:
+```cmd
+composer install
+```
+#### Login to your Postgres Database:
+```cmd
+sudo -i -u postgres
+psql
+```
+CREATE DATABASE dbname;
+#### Set Postgres Password (If never):
+```cmd
+ALTER USER postgres PASSWORD 'root';
+```
+#### Create New Database:
+```cmd
+CREATE DATABASE laravel9admin;
+```
+#### Put the config on .env file like below:
+```
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+<!-- DB_SOCKET=/var/run/mysqld/mysqld.sock -->
+DB_PORT=5432
+DB_DATABASE=laravel9admin
+DB_USERNAME=postgres
+DB_PASSWORD=root
+
+```
+#### Here for PostgreSQL Resource:
+<a href="https://www.postgresqltutorial.com/psql-commands/">PostgreSQL Command Line</a>
+
+<a href="https://www.postgresqltutorial.com/wp-content/uploads/2018/03/PostgreSQL-Cheat-Sheet.pdf">PostgreSQL CheatSheet</a>
 #### Hit command below:
 ```cmd
 $ php artisan migrate
