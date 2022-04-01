@@ -34,7 +34,10 @@ Setting
 <img src="https://raw.githubusercontent.com/Laravel-Tech-ID/Laravel9Admin/master/public/images/Setting.png">
 Profile
 <img src="https://raw.githubusercontent.com/Laravel-Tech-ID/Laravel9Admin/master/public/images/Profile.png">
-
+Laravel and Laravel Octane Comparison
+<img src="https://raw.githubusercontent.com/Laravel-Tech-ID/Laravel9Admin/master/public/images/Laravel%20Octane.png">
+Docker Ready
+<img src="https://raw.githubusercontent.com/Laravel-Tech-ID/Laravel9Admin/master/public/images/Docker.png">
 
 ## Installation
 #### Clone the file to your local by typing below command:
