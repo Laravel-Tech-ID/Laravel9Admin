@@ -86,6 +86,11 @@ ALTER USER postgres PASSWORD 'root';
 ```cmd
 CREATE DATABASE laravel9admin;
 ```
+#### Exit from Postgres Database Terminal:
+```cmd
+\q
+exit
+```
 #### Put the config on .env file like below:
 ```
 DB_CONNECTION=pgsql
