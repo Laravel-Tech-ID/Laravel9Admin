@@ -31,17 +31,17 @@ class RoleAccessServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        //-------------------------------------//
-        //=== COMMENT THIS BEFORE MIGRATION ===//
-        //-------------------------------------//
+        //----------------------------------------//
+        //=== COMMENT THIS BEFORE INSTALLATION ===//
+        //----------------------------------------//
         Access::get()->map(function($access){
             Gate::define($access->name, function($user) use ($access){
                 return $user->hasAccess($access);
             });
         });
-        //-------------------------------------//
-        //= END COMMENT THIS BEFORE MIGRATION =//
-        //-------------------------------------//
+        //----------------------------------------//
+        //= END COMMENT THIS BEFORE INSTALLATION =//
+        //----------------------------------------//
 
         Blade::directive('role', function(... $roles){
             $roles = implode(',',$roles);
