@@ -237,8 +237,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
         'Functions' => App\Functions::class,
+        'Response' => App\Response::class,
     ])->toArray(),
 
 ];
