@@ -20,6 +20,10 @@ class User extends Authenticatable implements JWTSubject
     public $incrementing = false;
     protected $guarded = [];
     public $timestamps = false;
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
     protected $hidden = [
         'api_token',
         'email_verified_at',
@@ -40,7 +44,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-    
+
     public function personal()
     {
         return $this->hasOne('Modules\Personal\Entities\V1\Personal');
