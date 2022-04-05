@@ -17,7 +17,8 @@ Laravel 9 Admin is a starter pack for developing laravel application. This appli
 7. Octane Ready
 8. Docker Ready
 9. Recommended for PostgreSQL
-10. Switcable Admin Theme (on progress)
+10. JWT
+11. Switcable Admin Theme (on progress)
 
 ## Screenshot
 Login

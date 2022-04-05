@@ -5,11 +5,14 @@ namespace Modules\Access\Entities\V1;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\Access\Traits\RoleAccess;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
 
-    use RoleAccess;
+    use RoleAccess, HasApiTokens, Notifiable;
     
     protected $table = 'users';
     protected $primaryKey = 'id';
@@ -17,7 +20,27 @@ class User extends Authenticatable
     public $incrementing = false;
     protected $guarded = [];
     public $timestamps = false;
+    protected $hidden = [
+        'api_token',
+        'email_verified_at',
+        'password',
+        'remember_token',
+        'created_by',
+        'updated_by',
+        'created_at',
+        'updated_at'
+    ];
 
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+    
     public function personal()
     {
         return $this->hasOne('Modules\Personal\Entities\V1\Personal');
