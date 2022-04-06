@@ -26,7 +26,7 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="overflow-x:auto;padding:20px;">
-                        <form method="POST" action="{{ route('admin.access.access.update',$access->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.v1.access.access.update',$access->id) }}" enctype="multipart/form-data">
                             @csrf  
                             @method("PUT")
                             <div class="form-group row">
@@ -87,7 +87,7 @@
                                     </button>
                                 </div>
                                 <div class="col-md-6 offset-md-12">
-                                    <a href="{{ route('admin.access.access.index') }}" type="submit" class="btn btn-user btn-danger btn-block text-white">
+                                    <a href="{{ route('admin.v1.access.access.index') }}" type="submit" class="btn btn-user btn-danger btn-block text-white">
                                         {{ __('Back') }}
                                     </a>
                                 </div>

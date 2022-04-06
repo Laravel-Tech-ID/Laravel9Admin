@@ -15,7 +15,7 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Tag Management</h1>
             <div class="d-none d-sm-inline-block">
-                <a href="{{ route('admin.tag.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Add Tag</a>    
+                <a href="{{ route('admin.v1.tag.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Add Tag</a>    
             </div>
           </div>
           <!-- Content Row -->
@@ -46,8 +46,8 @@
                                         <td>{{ $tag->name }}</td>
                                         <td>{{ $tag->slug }}</td>
                                         <td align="center">
-                                          <a href="{{ route('admin.tag.edit',$tag->id) }}" class="btn btn-success btn-sm">Edit</a>
-                                          <a href="{{ route('admin.tag.destroy',$tag->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Confirm Delete')">Delete</a>
+                                          <a href="{{ route('admin.v1.tag.edit',$tag->id) }}" class="btn btn-success btn-sm">Edit</a>
+                                          <a href="{{ route('admin.v1.tag.destroy',$tag->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Confirm Delete')">Delete</a>
                                       </td>
                                   </tr>
                                     @php $no++; @endphp                                

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Access\Http\Controllers\V1\Web;
+namespace Modules\Access\Http\Controllers\Web\V1;
 
 use Illuminate\Http\Request;
 use DB;
@@ -55,7 +55,7 @@ class RoleController extends Controller
                 ]
             );
             DB::commit();
-            return redirect(route('admin.access.role.index'));
+            return redirect(route('admin.v1.access.role.index'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('status', $err->getMessage());
@@ -94,7 +94,7 @@ class RoleController extends Controller
                 ]
             );
             DB::commit();
-            return redirect(route('admin.access.role.index'));
+            return redirect(route('admin.v1.access.role.index'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('status', $err->getMessage());
@@ -107,7 +107,7 @@ class RoleController extends Controller
         try{
             Role::find($id)->delete();
             DB::commit();
-            return redirect(route('admin.access.role.index'));
+            return redirect(route('admin.v1.access.role.index'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('status', $err->getMessage());

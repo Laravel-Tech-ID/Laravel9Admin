@@ -26,7 +26,7 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="overflow-x:auto;padding:20px;">
-                        <form method="POST" action="{{ route('admin.profile.ortu.update',$data->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.v1.profile.ortu.update',$data->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="id" value="{{$data->id}}" />
@@ -174,7 +174,7 @@
                                     </button>
                                 </div>
                                 <div class="col-md-6 offset-md-12">
-                                    <a href="{{ route('admin.profile.ortu.index') }}" type="submit" class="btn btn-user btn-danger btn-block text-white">
+                                    <a href="{{ route('admin.v1.profile.ortu.index') }}" type="submit" class="btn btn-user btn-danger btn-block text-white">
                                         {{ __('Back') }}
                                     </a>
                                 </div>

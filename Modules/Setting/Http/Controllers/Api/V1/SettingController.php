@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Setting\Http\Controllers\V1\Api;
+namespace Modules\Setting\Http\Controllers\Api\V1;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;

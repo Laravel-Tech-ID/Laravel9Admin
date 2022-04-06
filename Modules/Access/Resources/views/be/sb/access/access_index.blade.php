@@ -27,7 +27,7 @@
                       @enderror
                     </div>                                                                                
                     <div class="col-md-4 mb-3 mb-sm-0">
-                      <button type="submit" name="assignbutton" formaction="{{ route('admin.access.access.index') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i>
+                      <button type="submit" name="assignbutton" formaction="{{ route('admin.v1.access.access.index') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i>
                         {{ __('Search') }}                              
                       </button>
                     </div>
@@ -51,13 +51,13 @@
                         <div class="col-md-6 mb-3 mb-sm-0">
                         </div>
                         <div class="col-md-6 mb-3 mb-sm-0">
-                          <a style="float:left;margin-right:10px;margin-left:70px" href="{{ route('admin.access.access.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Add Access</a>    
+                          <a style="float:left;margin-right:10px;margin-left:70px" href="{{ route('admin.v1.access.access.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Add Access</a>    
                           <form method="POST" >
                           @csrf
                           @method('POST')
-                          <button style="float:left;margin-right:10px;" type="submit" name="assignbutton" formaction="{{ route('admin.access.access.activateall') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Activate</button>
-                          <button style="float:left;margin-right:10px;" type="submit" name="assignbutton" formaction="{{ route('admin.access.access.inactivateall') }}" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Inactivate</button>            
-                          <button style="float:left;" type="submit" name="assignbutton" formaction="{{ route('admin.access.access.deleteall') }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="return confirm('Confirm Delete')"><i class="fas fa-edit fa-sm text-white-50"></i> Delete</button>            
+                          <button style="float:left;margin-right:10px;" type="submit" name="assignbutton" formaction="{{ route('admin.v1.access.access.activateall') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Activate</button>
+                          <button style="float:left;margin-right:10px;" type="submit" name="assignbutton" formaction="{{ route('admin.v1.access.access.inactivateall') }}" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Inactivate</button>            
+                          <button style="float:left;" type="submit" name="assignbutton" formaction="{{ route('admin.v1.access.access.deleteall') }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="return confirm('Confirm Delete')"><i class="fas fa-edit fa-sm text-white-50"></i> Delete</button>            
                         </div>
                       </div>
 
@@ -91,9 +91,9 @@
                                               Action
                                             </button>
                                             <div class="dropdown-menu">
-                                              <a href="{{ route('admin.access.access.status',$access->id) }}" class="dropdown-item">{{($access->status == 'Active') ? 'Inactivate' : 'Activate'}}</a>
-                                              <a href="{{ route('admin.access.access.edit',$access->id) }}" class="dropdown-item">Edit</a>
-                                              <a href="{{ route('admin.access.access.destroy',$access->id) }}" onclick="return confirm('Confirm Delete')" class="dropdown-item">Delete</a>
+                                              <a href="{{ route('admin.v1.access.access.status',$access->id) }}" class="dropdown-item">{{($access->status == 'Active') ? 'Inactivate' : 'Activate'}}</a>
+                                              <a href="{{ route('admin.v1.access.access.edit',$access->id) }}" class="dropdown-item">Edit</a>
+                                              <a href="{{ route('admin.v1.access.access.destroy',$access->id) }}" onclick="return confirm('Confirm Delete')" class="dropdown-item">Delete</a>
                                             </div>
                                           </div>
                                         </td>

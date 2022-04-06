@@ -14,7 +14,7 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">User Management</h1>
             <div class="d-none d-sm-inline-block">
-                <a href="{{ route('admin.access.user.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Add User</a>    
+                <a href="{{ route('admin.v1.access.user.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Add User</a>    
             </div>
           </div>
           <!-- Content Row -->
@@ -28,7 +28,7 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="overflow-x:auto;padding:20px;">
-                    <form method="GET" action="{{ route('admin.access.user.index') }}">
+                    <form method="GET" action="{{ route('admin.v1.access.user.index') }}">
                         @csrf
                         <div class="form-group row">
                           
@@ -74,15 +74,15 @@
                                         </td>
                                         <td>{{ ucwords($user->status) }}</td>
                                         <!-- <td align="center"><img src="{{ ($user->picture) ? 'https://my.alqudwah.id/'.$user->picture : asset(config('access.media').'user/user.png') }}" width="100px" height="100px"/></td> -->
-                                        <td align="center"><img src="{{ ($user->picture) ? route('admin.access.user.file',$user->picture) : asset(config('access.media').'user/user.png') }}" width="100px" height="100px"/></td>
+                                        <td align="center"><img src="{{ ($user->picture) ? route('admin.v1.access.user.file',$user->picture) : asset(config('access.media').'user/user.png') }}" width="100px" height="100px"/></td>
                                         <td align="center">
                                           <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                               Action
                                             </button>
                                             <div class="dropdown-menu">
-                                              <a href="{{ route('admin.access.user.edit',$user->id) }}" class="dropdown-item">Edit</a>
-                                              <form action="{{ route('admin.access.user.destroy',$user->id) }}" method="post">
+                                              <a href="{{ route('admin.v1.access.user.edit',$user->id) }}" class="dropdown-item">Edit</a>
+                                              <form action="{{ route('admin.v1.access.user.destroy',$user->id) }}" method="post">
                                                 <input type="submit" value="Delete" class="dropdown-item" onclick="return confirm('Confirm Delete')"/>
                                                 @method('DELETE')
                                                 @csrf

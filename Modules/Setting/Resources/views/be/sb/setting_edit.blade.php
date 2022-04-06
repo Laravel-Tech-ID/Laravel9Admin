@@ -26,7 +26,7 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="overflow-x:auto;padding:20px;">
-                        <form method="POST" action="{{ route('admin.setting.update') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.v1.setting.update') }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group row">

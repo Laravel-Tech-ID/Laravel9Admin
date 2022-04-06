@@ -26,7 +26,7 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="overflow-x:auto;padding:20px;">
-                        <form method="POST" action="{{ route('admin.profile.alamat.update',$data->id) }}">
+                        <form method="POST" action="{{ route('admin.v1.profile.alamat.update',$data->id) }}">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="id" value="{{$data->id}}" />
@@ -242,7 +242,7 @@
                                     </button>
                                 </div>
                                 <div class="col-md-6 offset-md-12">
-                                    <a href="{{ route('admin.profile.alamat.index') }}" type="submit" class="btn btn-user btn-danger btn-block text-white">
+                                    <a href="{{ route('admin.v1.profile.alamat.index') }}" type="submit" class="btn btn-user btn-danger btn-block text-white">
                                         {{ __('Back') }}
                                     </a>
                                 </div>

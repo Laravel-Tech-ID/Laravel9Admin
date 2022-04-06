@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Access\Http\Controllers\V1\Web;
+namespace Modules\Access\Http\Controllers\Web\V1;
 
 use Illuminate\Http\Request;
 use DB;

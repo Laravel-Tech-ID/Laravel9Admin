@@ -15,8 +15,8 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Prestasi {{$personal->user->name}} Management</h1>
             <div class="d-none d-sm-inline-block">
-                <a href="{{ route('admin.profile.prestasi.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Tambah Data Prestasi</a>    
-                <a href="{{ route('admin.dashboard.index') }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-chevron-left fa-sm text-white-50"></i> Kembali</a>    
+                <a href="{{ route('admin.v1.profile.prestasi.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Tambah Data Prestasi</a>    
+                <a href="{{ route('admin.v1.dashboard.index') }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-chevron-left fa-sm text-white-50"></i> Kembali</a>    
             </div>
           </div>
           <!-- Content Row -->
@@ -56,7 +56,7 @@
                                         <td>{{ $data->tingkat }}</td>
                                         <td>{{ $data->tahun }}</td>
                                         <td>{{ $data->panitia }}</td>
-                                        <td align="center"><img src="{{ ($data->sertifikat) ? route('admin.profile.prestasi.file',$data->sertifikat) : asset(config('personal.media').'prestasi/sertifikat.png') }}" width="100px" height="100px"/></td>
+                                        <td align="center"><img src="{{ ($data->sertifikat) ? route('admin.v1.profile.prestasi.file',$data->sertifikat) : asset(config('personal.media').'prestasi/sertifikat.png') }}" width="100px" height="100px"/></td>
                                         <td>{{ $data->tropi }}</td>
                                         <td>{{ $data->ket }}</td>
                                         <td align="center">
@@ -65,8 +65,8 @@
                                               Action
                                             </button>
                                             <div class="dropdown-menu">
-                                              <a href="{{ route('admin.profile.prestasi.edit',$data->id) }}" class="dropdown-item">Edit</a>
-                                              <form action="{{ route('admin.profile.prestasi.destroy',$data->id) }}" method="post">
+                                              <a href="{{ route('admin.v1.profile.prestasi.edit',$data->id) }}" class="dropdown-item">Edit</a>
+                                              <form action="{{ route('admin.v1.profile.prestasi.destroy',$data->id) }}" method="post">
                                                 <input type="submit" value="Delete" class="dropdown-item" onclick="return confirm('Confirm Delete')"/>
                                                 @method('DELETE')
                                                 @csrf

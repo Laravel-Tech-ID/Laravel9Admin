@@ -26,7 +26,7 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="overflow-x:auto;padding:20px;">
-                        <form method="POST" action="{{ route('admin.profile.ahli.update',$data->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.v1.profile.ahli.update',$data->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="id" value="{{$data->id}}" />
@@ -78,7 +78,7 @@
                             <div class="form-group row" style="margin-bottom: 60px;">
                                 <label for="sertifikat" class="col-md-3 col-form-label text-md-right">{{ __('Sertifikat') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0" style="text-align:center;padding:10px;">
-                                    <img src="{{ ($data->sertifikat) ? route('admin.profile.ahli.file',$data->sertifikat) : asset(config('personal.media').'ahli/ahli.jpg') }}" width="100%" height="100%" style="padding:10px;"/>
+                                    <img src="{{ ($data->sertifikat) ? route('admin.v1.profile.ahli.file',$data->sertifikat) : asset(config('personal.media').'ahli/ahli.jpg') }}" width="100%" height="100%" style="padding:10px;"/>
                                     <input id="sertifikat" type="file" class="form-control form-control-user @error('sertifikat') is-invalid @enderror" name="sertifikat" value="{{ $data->sertifikat }}" autocomplete="sertifikat">
                                     @error('sertifikat')
                                         <span class="invalid-feedback" status="alert">
@@ -109,7 +109,7 @@
                                     </button>
                                 </div>
                                 <div class="col-md-6 offset-md-12">
-                                    <a href="{{ route('admin.profile.ahli.index') }}" type="submit" class="btn btn-user btn-danger btn-block text-white">
+                                    <a href="{{ route('admin.v1.profile.ahli.index') }}" type="submit" class="btn btn-user btn-danger btn-block text-white">
                                         {{ __('Back') }}
                                     </a>
                                 </div>

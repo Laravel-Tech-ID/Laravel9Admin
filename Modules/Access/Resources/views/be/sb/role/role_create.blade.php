@@ -26,7 +26,7 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="overflow-x:auto;padding:20px;">
-                        <form method="POST" action="{{ route('admin.access.role.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.v1.access.role.store') }}" enctype="multipart/form-data">
                             @csrf  
                             <div class="form-group row">
                                 <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Name') }}</label>
@@ -71,7 +71,7 @@
                                     </button>
                                 </div>
                                 <div class="col-md-6 offset-md-12">
-                                    <a href="{{ route('admin.access.role.index') }}" type="submit" class="btn btn-user btn-danger btn-block text-white">
+                                    <a href="{{ route('admin.v1.access.role.index') }}" type="submit" class="btn btn-user btn-danger btn-block text-white">
                                         {{ __('Back') }}
                                     </a>
                                 </div>

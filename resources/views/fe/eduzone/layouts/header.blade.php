@@ -34,7 +34,7 @@
 							</button>
 							<!-- extra nav -->
 							<div class="extra-nav">
-								<a href="{{ route('admin.dashboard.index') }}" class="site-button radius-no">LOGIN</a>
+								<a href="{{ route('admin.v1.dashboard.index') }}" class="site-button radius-no">LOGIN</a>
 							</div>
 							<!-- Quik search -->
 							<div class="dlab-quik-search ">

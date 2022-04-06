@@ -15,7 +15,7 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Role Management</h1>
             <div class="d-none d-sm-inline-block">
-                <a href="{{ route('admin.access.role.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Add Role</a>    
+                <a href="{{ route('admin.v1.access.role.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Add Role</a>    
             </div>
           </div>
           <!-- Content Row -->
@@ -54,9 +54,9 @@
                                               Action
                                             </button>
                                             <div class="dropdown-menu">
-                                              <a href="{{ route('admin.access.role.access.index',$role->id) }}" class="dropdown-item">Access</a>
-                                              <a href="{{ route('admin.access.role.edit',$role->id) }}" class="dropdown-item">Edit</a>
-                                              <form action="{{ route('admin.access.role.destroy',$role->id) }}" method="post">
+                                              <a href="{{ route('admin.v1.access.role.access.index',$role->id) }}" class="dropdown-item">Access</a>
+                                              <a href="{{ route('admin.v1.access.role.edit',$role->id) }}" class="dropdown-item">Edit</a>
+                                              <form action="{{ route('admin.v1.access.role.destroy',$role->id) }}" method="post">
                                                 <input type="submit" value="Delete" class="dropdown-item" onclick="return confirm('Confirm Delete')"/>
                                                 @method('DELETE')
                                                 @csrf

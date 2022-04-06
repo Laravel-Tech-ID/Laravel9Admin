@@ -26,7 +26,7 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="overflow-x:auto;padding:20px;">
-                        <form method="POST" action="{{ route('admin.setting.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.v1.setting.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <label for="initial" class="col-md-3 col-form-label text-md-right">{{ __('Company Initial [initial]') }}</label>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Setting\Http\Controllers\V1\Web;
+namespace Modules\Setting\Http\Controllers\Web\V1;
 
 use Illuminate\Http\Request;
 use Modules\Setting\Entities\V1\Setting;
@@ -98,7 +98,7 @@ class SettingController extends Controller
             );
 
             DB::commit();
-            return redirect(route('admin.setting.index'));
+            return redirect(route('admin.v1.setting.index'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('error',$err->getMessage());
@@ -170,7 +170,7 @@ class SettingController extends Controller
                 $arrs
             );
             DB::commit();
-            return redirect(route('admin.setting.index'));            
+            return redirect(route('admin.v1.setting.index'));            
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('error',$err->getMessage());

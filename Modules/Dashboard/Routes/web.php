@@ -12,9 +12,7 @@
 */
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth','app']],function(){
-    Route::get('dashboard', [Modules\Dashboard\Http\Controllers\V1\Web\DashboardController::class, 'index'])->name('admin.dashboard.index');
-});
-
-Route::group(['prefix' => 'admin', 'middleware' => ['auth','app']],function(){
-    Route::get('ortu', [Modules\Dashboard\Http\Controllers\V1\Web\DashboardController::class, 'ortu'])->name('admin.ortu.index');
+    Route::group(['prefix' => 'v1'],function(){
+        Route::get('dashboard', [Modules\Dashboard\Http\Controllers\Web\V1\DashboardController::class, 'index'])->name('admin.v1.dashboard.index');
+    });
 });

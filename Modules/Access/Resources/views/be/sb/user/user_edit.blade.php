@@ -26,7 +26,7 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="overflow-x:auto;padding:20px;">
-                        <form method="POST" action="{{ route('admin.access.user.update',$user->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.v1.access.user.update',$user->id) }}" enctype="multipart/form-data">
                             @csrf  
                             @method('PUT')
                             <div class="form-group row">
@@ -131,7 +131,7 @@
                             <div class="form-group row" style="margin-bottom: 60px;">
                                 <label for="picture" class="col-md-3 col-form-label text-md-right">{{ __('Foto') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0" style="text-align:center;padding:10px;">
-                                    <img src="{{ ($user->picture) ? route('admin.access.user.file',$user->picture) : asset(config('access.media').'user/user.png') }}" width="100%" height="100%" style="padding:10px;"/>
+                                    <img src="{{ ($user->picture) ? route('admin.v1.access.user.file',$user->picture) : asset(config('access.media').'user/user.png') }}" width="100%" height="100%" style="padding:10px;"/>
                                     <input id="picture" type="file" class="form-control form-control-user @error('picture') is-invalid @enderror" name="picture" value="{{ $user->picture }}" autocomplete="picture">
                                     @error('picture')
                                         <span class="invalid-feedback" status="alert">
@@ -171,7 +171,7 @@
                                     </button>
                                 </div>
                                 <div class="col-md-6 offset-md-12">
-                                    <a href="{{ route('admin.access.user.index') }}" type="submit" class="btn btn-user btn-danger btn-block text-white">
+                                    <a href="{{ route('admin.v1.access.user.index') }}" type="submit" class="btn btn-user btn-danger btn-block text-white">
                                         {{ __('Back') }}
                                     </a>
                                 </div>

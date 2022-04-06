@@ -26,7 +26,7 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="overflow-x:auto;padding:20px;">
-                        <form method="POST" action="{{ route('admin.profile.ahli.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.v1.profile.ahli.store') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row" id="div_ref_ahli_id">
@@ -107,7 +107,7 @@
                                     </button>
                                 </div>
                                 <div class="col-md-6 offset-md-12">
-                                    <a href="{{ route('admin.profile.ahli.index') }}" type="submit" class="btn btn-user btn-danger btn-block text-white">
+                                    <a href="{{ route('admin.v1.profile.ahli.index') }}" type="submit" class="btn btn-user btn-danger btn-block text-white">
                                         {{ __('Back') }}
                                     </a>
                                 </div>

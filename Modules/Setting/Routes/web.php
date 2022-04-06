@@ -12,10 +12,11 @@
 */
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth','app']],function(){
-// Route::group(['prefix' => 'admin'],function(){
-    Route::group(['prefix' => 'setting'], function(){
-        Route::get('', [Modules\Setting\Http\Controllers\V1\Web\SettingController::class, 'index'])->name('admin.setting.index');
-        Route::post('store', [Modules\Setting\Http\Controllers\V1\Web\SettingController::class, 'store'])->name('admin.setting.store');
-        Route::put('update', [Modules\Setting\Http\Controllers\V1\Web\SettingController::class, 'update'])->name('admin.setting.update');
+    Route::group(['prefix' => 'v1'],function(){
+        Route::group(['prefix' => 'setting'], function(){
+            Route::get('', [Modules\Setting\Http\Controllers\Web\V1\SettingController::class, 'index'])->name('admin.v1.setting.index');
+            Route::post('store', [Modules\Setting\Http\Controllers\Web\V1\SettingController::class, 'store'])->name('admin.v1.setting.store');
+            Route::put('update', [Modules\Setting\Http\Controllers\Web\V1\SettingController::class, 'update'])->name('admin.v1.setting.update');
+        });
     });
 });

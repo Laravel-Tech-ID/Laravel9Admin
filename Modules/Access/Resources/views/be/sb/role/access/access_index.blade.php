@@ -27,13 +27,13 @@
                       @enderror
                     </div>                                                                                
                     <div class="col-md-3 mb-3 mb-sm-0">
-                      <button type="submit" name="assignbutton" formaction="{{ route('admin.access.role.access.index',$role->id) }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i>
+                      <button type="submit" name="assignbutton" formaction="{{ route('admin.v1.access.role.access.index',$role->id) }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i>
                         {{ __('Search') }}                              
                       </button>
                     </div>
               </form>
                     <div class="col-md-3 mb-3 mb-sm-0">
-                      <a href="{{ route('admin.access.role.index') }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-chevron-left fa-sm text-white-50"></i> Kembali</a>    
+                      <a href="{{ route('admin.v1.access.role.index') }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-chevron-left fa-sm text-white-50"></i> Kembali</a>    
                     </div>
                   </div>
             </div>
@@ -57,8 +57,8 @@
                         <div class="col-md-9 mb-3 mb-sm-0">
                         </div>                                                                                
                         <div class="col-md-3 mb-3 mb-sm-0">
-                          <button style="float:left;" type="submit" name="assignbutton" formaction="{{ route('admin.access.role.access.assignall',$role->id) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Assign All</button>
-                          <button style="float:right;" type="submit" name="assignbutton" formaction="{{ route('admin.access.role.access.revokeall',$role->id) }}" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Revoke All</button>            
+                          <button style="float:left;" type="submit" name="assignbutton" formaction="{{ route('admin.v1.access.role.access.assignall',$role->id) }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Assign All</button>
+                          <button style="float:right;" type="submit" name="assignbutton" formaction="{{ route('admin.v1.access.role.access.revokeall',$role->id) }}" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Revoke All</button>            
                         </div>
                       </div>
 
@@ -85,7 +85,7 @@
                                         <center><img src="{{ ($role->hasAccess($access->name)) ? asset(config('access.media').'true.png') : asset(config('access.media').'false.png') }}" width="30px" height="30px"/></center>
                                         </td>
                                         <td align="center">
-                                          <a href="{{ route('admin.access.role.access.assign',['role' => $role->id,'access' => $access->id]) }}"
+                                          <a href="{{ route('admin.v1.access.role.access.assign',['role' => $role->id,'access' => $access->id]) }}"
                                           <button type="button" class="btn btn-sm btn-{{($role->hasAccess($access->name)) ? 'warning' : 'primary'}}" aria-haspopup="true" aria-expanded="false">
                                           {{($role->hasAccess($access->name)) ? 'Revoke' : 'Assign'}}
                                           </button>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Access\Http\Controllers\V1\Web;
+namespace Modules\Access\Http\Controllers\Web\V1;
 
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
@@ -97,7 +97,7 @@ class UserController extends Controller
             
             $user->assignRole($request['role']);    
             DB::commit();
-            return redirect(route('admin.access.user.index'));
+            return redirect(route('admin.v1.access.user.index'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('error',$err->getMessage());
@@ -195,7 +195,7 @@ class UserController extends Controller
             $data->refreshRole($request['role']);
 
             DB::commit();
-            return redirect(route('admin.access.user.index'));
+            return redirect(route('admin.v1.access.user.index'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('error',$err->getMessage());

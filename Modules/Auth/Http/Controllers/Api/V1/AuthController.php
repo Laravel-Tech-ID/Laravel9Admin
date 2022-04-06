@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Auth\Http\Controllers\V1\Api;
+namespace Modules\Auth\Http\Controllers\Api\V1;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Profile\Http\Controllers\V1\Web;
+namespace Modules\Profile\Http\Controllers\Web\V1;
 
 use Auth;
 use Carbon\Carbon;
@@ -13,21 +13,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use File;
-// use Illuminate\Support\Facades\Auth;
-use Modules\Personal\Entities\V1\Personal;
-use Modules\Personal\Entities\V1\PersonalAhli;
-use Modules\Personal\Entities\V1\PersonalAlamat;
-use Modules\Personal\Entities\V1\PersonalBea;
-use Modules\Personal\Entities\V1\PersonalCita;
-use Modules\Personal\Entities\V1\PersonalDidik;
-use Modules\Personal\Entities\V1\PersonalHobi;
-use Modules\Personal\Entities\V1\PersonalKerja;
-use Modules\Personal\Entities\V1\PersonalOrtu;
-use Modules\Personal\Entities\V1\PersonalPrestasi;
-use Modules\Personal\Entities\V1\PersonalSakit;
-use Modules\Personal\Entities\V1\PersonalSehat;
-use Modules\Personal\Entities\V1\PersonalSiswa;
-use Modules\PPDB\Entities\V1\Pendaftaran;
 use Storage;
 
 class ProfileController extends Controller
@@ -131,24 +116,6 @@ class ProfileController extends Controller
     {
         DB::beginTransaction();
         try{
-            $personal = Personal::where('profile_id', $id)->first();
-            if($personal){
-                PersonalAhli::where('personal_id',$personal->id)->delete();
-                PersonalAlamat::where('personal_id',$personal->id)->delete();
-                PersonalBea::where('personal_id',$personal->id)->delete();
-                PersonalCita::where('personal_id',$personal->id)->delete();
-                PersonalDidik::where('personal_id',$personal->id)->delete();
-                PersonalHobi::where('personal_id',$personal->id)->delete();
-                PersonalKerja::where('personal_id',$personal->id)->delete();
-                PersonalOrtu::where('personal_id',$personal->id)->delete();
-                PersonalPrestasi::where('personal_id',$personal->id)->delete();
-                PersonalSakit::where('personal_id',$personal->id)->delete();
-                PersonalSehat::where('personal_id',$personal->id)->delete();
-                PersonalSiswa::where('personal_id',$personal->id)->delete();
-                Pendaftaran::where('personal_id',$personal->id)->delete();
-                $personal->delete();    
-            }
-
             $data = User::find($id);
             if($data->delete())
             {

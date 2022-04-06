@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Access\Http\Controllers\V1\Web;
+namespace Modules\Access\Http\Controllers\Web\V1;
 
 use Illuminate\Http\Request;
 use DB;
@@ -80,7 +80,7 @@ class AccessController extends Controller
                 ]
             );
             DB::commit();
-            return redirect(route('admin.access.access.index'));
+            return redirect(route('admin.v1.access.access.index'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('status', $err->getMessage());
@@ -121,7 +121,7 @@ class AccessController extends Controller
                 ]
             );
             DB::commit();
-            return redirect(route('admin.access.access.index'));
+            return redirect(route('admin.v1.access.access.index'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('status', $err->getMessage());
