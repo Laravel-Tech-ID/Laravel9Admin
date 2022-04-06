@@ -34,11 +34,11 @@ class RoleAccessServiceProvider extends ServiceProvider
         //----------------------------------------//
         //=== COMMENT THIS BEFORE INSTALLATION ===//
         //----------------------------------------//
-        // Access::get()->map(function($access){
-        //     Gate::define($access->name, function($user) use ($access){
-        //         return $user->hasAccess($access);
-        //     });
-        // });
+        Access::get()->map(function($access){
+            Gate::define($access->name, function($user) use ($access){
+                return $user->hasAccess($access);
+            });
+        });
         //----------------------------------------//
         //= END COMMENT THIS BEFORE INSTALLATION =//
         //----------------------------------------//
