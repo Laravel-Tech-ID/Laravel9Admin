@@ -20,6 +20,7 @@ class User extends Authenticatable implements JWTSubject
     public $incrementing = false;
     protected $guarded = [];
     public $timestamps = false;
+    
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
