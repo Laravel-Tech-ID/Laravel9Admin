@@ -75,25 +75,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($accesses as $access)
+                                @foreach ($datas as $data)
                                     <tr>
-                                        <td><input name="access[]" value="{{ $access->id }}" type="checkbox" /></td>
-                                        <td>{{($accesses->currentPage() - 1) * $accesses->perPage() + $loop->iteration}}</td>
-                                        <td>{{ $access->name }}</td>
-                                        <td>{{ $access->guard_name }}</td>
+                                        <td><input name="access[]" value="{{ $data->id }}" type="checkbox" /></td>
+                                        <td>{{($datas->currentPage() - 1) * $datas->perPage() + $loop->iteration}}</td>
+                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->guard_name }}</td>
                                         <td>
-                                        <center><img src="{{ ($access->status == 'Active') ? asset(config('access.media').'true.png') : asset(config('access.media').'false.png') }}" width="30px" height="30px"/></center>
+                                        <center><img src="{{ ($data->status == 'Active') ? asset(config('access.media').'true.png') : asset(config('access.media').'false.png') }}" width="30px" height="30px"/></center>
                                         </td>
-                                        <td>{{ $access->desc }}</td>
+                                        <td>{{ $data->desc }}</td>
                                         <td align="center">
                                           <div class="btn-group">
                                             <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                               Action
                                             </button>
                                             <div class="dropdown-menu">
-                                              <a href="{{ route('admin.v1.access.access.status',$access->id) }}" class="dropdown-item">{{($access->status == 'Active') ? 'Inactivate' : 'Activate'}}</a>
-                                              <a href="{{ route('admin.v1.access.access.edit',$access->id) }}" class="dropdown-item">Edit</a>
-                                              <a href="{{ route('admin.v1.access.access.destroy',$access->id) }}" onclick="return confirm('Confirm Delete')" class="dropdown-item">Delete</a>
+                                              <a href="{{ route('admin.v1.access.access.status',$data->id) }}" class="dropdown-item">{{($data->status == 'Active') ? 'Inactivate' : 'Activate'}}</a>
+                                              <a href="{{ route('admin.v1.access.access.edit',$data->id) }}" class="dropdown-item">Edit</a>
+                                              <a href="{{ route('admin.v1.access.access.destroy',$data->id) }}" onclick="return confirm('Confirm Delete')" class="dropdown-item">Delete</a>
                                             </div>
                                           </div>
                                         </td>
@@ -103,7 +103,7 @@
                               </tbody>
                         </table>
                         <div class="d-none d-sm-inline-block" style="float:right;">
-                            {!! $accesses->appends(request()->input())->links('vendor.pagination.bootstrap-4') !!}
+                            {!! $datas->appends(request()->input())->links('vendor.pagination.bootstrap-4') !!}
                         </div>          
                       </div>
                   </div>                

@@ -28,7 +28,7 @@ class ProfileController extends Controller
         DB::beginTransaction();
         try{
             $search = $request['search'];
-            $users = User::
+            $datas = User::
             where('code','like','%'.$search.'%')
             ->orWhere('name','like','%'.$search.'%')
             ->orWhere('phone','like','%'.$search.'%')
@@ -36,7 +36,7 @@ class ProfileController extends Controller
             ->orWhere('status','like','%'.$search.'%')
             ->paginate(10);
             DB::commit();
-            return view('profile::profile.profile_show', compact('users','search'));
+            return view('profile::profile.profile_show', compact('datas','search'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->with('error',$err->getMessage());
@@ -52,9 +52,9 @@ class ProfileController extends Controller
         DB::beginTransaction();
         try{
             $roles = Role::all();
-            $user = User::find(Auth::user()->id);
+            $data = User::find(Auth::user()->id);
             DB::commit();
-            return view('profile::'.config('app.be_view').'.profile.profile_edit', compact('user','roles'));
+            return view('profile::'.config('app.be_view').'.profile.profile_edit', compact('data','roles'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->with('error',$err->getMessage());

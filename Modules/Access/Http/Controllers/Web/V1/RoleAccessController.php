@@ -17,9 +17,9 @@ class RoleAccessController extends Controller
         try{
             $search = $request['search'];
             $role = Role::find($id);
-            $accesses = Access::where('name','like','%'.$request['search'].'%')->orWhere('guard_name','like','%'.$request['search'].'%')->paginate(100);
+            $datas = Access::where('name','like','%'.$request['search'].'%')->orWhere('guard_name','like','%'.$request['search'].'%')->paginate(100);
             DB::commit();
-            return view('access::'.config('app.be_view').'.role.access.access_index',compact('accesses','role','search'));
+            return view('access::'.config('app.be_view').'.role.access.access_index',compact('datas','role','search'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->with('error', $err->getMessage());

@@ -26,14 +26,14 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="overflow-x:auto;padding:20px;">
-                        <form method="POST" action="{{ route('admin.v1.access.access.update',$access->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.v1.access.access.update',$data->id) }}" enctype="multipart/form-data">
                             @csrf  
                             @method("PUT")
                             <div class="form-group row">
-                                <input type="hidden" name="id" value="{{ $access->id }}" />
+                                <input type="hidden" name="id" value="{{ $data->id }}" />
                                 <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Name') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ $access->name }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ $data->name }}" required autocomplete="name" autofocus>
                                     @error('name')
                                         <span class="invalid-feedback" access="alert">
                                             <strong>{{ $message }}</strong>
@@ -44,9 +44,9 @@
                             <div class="form-group row">
                                 <label for="guard_name" class="col-md-3 col-form-label text-md-right">{{ __('guard_name') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <select name="guard_name" id="guard_name" class="form-control form-control-user @error('guard_name') is-invalid @enderror" value="{{ $access->guard_name }}" required autocomplete="guard_name">
-                                        <option value="web" {{ ($access->guard_name == 'web') ? 'selected' : '' }}>Web</option>
-                                        <option value="api" {{ ($access->guard_name == 'api') ? 'selected' : '' }}>Api</option>
+                                    <select name="guard_name" id="guard_name" class="form-control form-control-user @error('guard_name') is-invalid @enderror" value="{{ $data->guard_name }}" required autocomplete="guard_name">
+                                        <option value="web" {{ ($data->guard_name == 'web') ? 'selected' : '' }}>Web</option>
+                                        <option value="api" {{ ($data->guard_name == 'api') ? 'selected' : '' }}>Api</option>
                                     </select>
                                     @error('guard_name')
                                         <span class="invalid-feedback" status="alert">
@@ -58,9 +58,9 @@
                             <div class="form-group row">
                                 <label for="status" class="col-md-3 col-form-label text-md-right">{{ __('Status') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <select name="status" id="status" class="form-control form-control-user @error('status') is-invalid @enderror" value="{{ $access->status }}" required autocomplete="status">
-                                        <option value="Active" {{ ($access->status == 'Active') ? 'selected' : '' }}>Active</option>
-                                        <option value="Inactive" {{ ($access->status == 'Inactive') ? 'selected' : '' }}>Inactive</option>
+                                    <select name="status" id="status" class="form-control form-control-user @error('status') is-invalid @enderror" value="{{ $data->status }}" required autocomplete="status">
+                                        <option value="Active" {{ ($data->status == 'Active') ? 'selected' : '' }}>Active</option>
+                                        <option value="Inactive" {{ ($data->status == 'Inactive') ? 'selected' : '' }}>Inactive</option>
                                     </select>
                                     @error('status')
                                         <span class="invalid-feedback" status="alert">
@@ -72,7 +72,7 @@
                             <div class="form-group row">
                                 <label for="desc" class="col-md-3 col-form-label text-md-right">{{ __('Description') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="desc" type="text" class="form-control form-control-user @error('desc') is-invalid @enderror" name="desc" value="{{ $access->desc }}" autocomplete="desc" autofocus>
+                                    <input id="desc" type="text" class="form-control form-control-user @error('desc') is-invalid @enderror" name="desc" value="{{ $data->desc }}" autocomplete="desc" autofocus>
                                     @error('desc')
                                         <span class="invalid-feedback" status="alert">
                                             <strong>{{ $message }}</strong>

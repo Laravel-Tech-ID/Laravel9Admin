@@ -21,7 +21,7 @@ class UserController extends Controller
         DB::beginTransaction();
         try{
             $search = $request['search'];
-            $users = User::
+            $datas = User::
             where('code','like','%'.$search.'%')
             ->orWhere('name','like','%'.$search.'%')
             ->orWhere('phone','like','%'.$search.'%')
@@ -29,7 +29,7 @@ class UserController extends Controller
             ->orWhere('status','like','%'.$search.'%')
             ->paginate(10);
             DB::commit();
-            return view('access::'.config('app.be_view').'.user.user_index',compact('users','search'));
+            return view('access::'.config('app.be_view').'.user.user_index',compact('datas','search'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->with('error',$err->getMessage());
@@ -138,9 +138,9 @@ class UserController extends Controller
         DB::beginTransaction();
         try{
             $roles = Role::all();
-            $user = User::find($id);
+            $data = User::find($id);
             DB::commit();
-            return view('access::'.config('app.be_view').'.user.user_edit', compact('user','roles'));
+            return view('access::'.config('app.be_view').'.user.user_edit', compact('data','roles'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->with('error',$err->getMessage());

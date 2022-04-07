@@ -14,9 +14,9 @@ class RoleController extends Controller
     {
         DB::beginTransaction();
         try{
-            $roles = Role::paginate(50);
+            $datas = Role::paginate(50);
             DB::commit();
-            return view('access::'.config('app.be_view').'.role.role_index',compact('roles'));
+            return view('access::'.config('app.be_view').'.role.role_index',compact('datas'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->with('error', $err->getMessage());
@@ -66,9 +66,9 @@ class RoleController extends Controller
     {
         DB::beginTransaction();
         try{
-            $role = Role::find($id);
+            $data = Role::find($id);
             DB::commit();
-            return view('access::'.config('app.be_view').'.role.role_edit',compact('role'));
+            return view('access::'.config('app.be_view').'.role.role_edit',compact('data'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->with('error',$err->getMessage());

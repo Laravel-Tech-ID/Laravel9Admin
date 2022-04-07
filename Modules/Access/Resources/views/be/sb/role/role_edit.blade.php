@@ -26,14 +26,14 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="overflow-x:auto;padding:20px;">
-                        <form method="POST" action="{{ route('admin.v1.access.role.update', $role->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.v1.access.role.update', $data->id) }}" enctype="multipart/form-data">
                             @csrf  
                             @method('PUT')
                             <div class="form-group row">
-                                <input type="hidden" name="id" value="{{ $role->id }}" />
+                                <input type="hidden" name="id" value="{{ $data->id }}" />
                                 <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Name') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ $role->name }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ $data->name }}" required autocomplete="name" autofocus>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -44,9 +44,9 @@
                             <div class="form-group row">
                                 <label for="status" class="col-md-3 col-form-label text-md-right">{{ __('Status') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <select name="status" id="status" class="form-control form-control-user @error('status') is-invalid @enderror" value="{{ $role->status }}" required autocomplete="status">
-                                        <option value="Active" {{ ($role->status == 'Active') ? 'selected' : '' }}>Active</option>
-                                        <option value="Inactive" {{ ($role->status == 'Inactive') ? 'selected' : '' }}>Inactive</option>
+                                    <select name="status" id="status" class="form-control form-control-user @error('status') is-invalid @enderror" value="{{ $data->status }}" required autocomplete="status">
+                                        <option value="Active" {{ ($data->status == 'Active') ? 'selected' : '' }}>Active</option>
+                                        <option value="Inactive" {{ ($data->status == 'Inactive') ? 'selected' : '' }}>Inactive</option>
                                     </select>
                                     @error('status')
                                         <span class="invalid-feedback" status="alert">
@@ -58,7 +58,7 @@
                             <div class="form-group row">
                                 <label for="desc" class="col-md-3 col-form-label text-md-right">{{ __('Description') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="desc" type="text" class="form-control form-control-user @error('desc') is-invalid @enderror" name="desc" value="{{ $role->desc }}" required autocomplete="desc" autofocus>
+                                    <input id="desc" type="text" class="form-control form-control-user @error('desc') is-invalid @enderror" name="desc" value="{{ $data->desc }}" required autocomplete="desc" autofocus>
                                     @error('desc')
                                         <span class="invalid-feedback" status="alert">
                                             <strong>{{ $message }}</strong>

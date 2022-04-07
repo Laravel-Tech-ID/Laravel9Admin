@@ -82,11 +82,7 @@
                                             </button>
                                             <div class="dropdown-menu">
                                               <a href="{{ route('admin.v1.access.user.edit',$user->id) }}" class="dropdown-item">Edit</a>
-                                              <form action="{{ route('admin.v1.access.user.destroy',$user->id) }}" method="post">
-                                                <input type="submit" value="Delete" class="dropdown-item" onclick="return confirm('Confirm Delete')"/>
-                                                @method('DELETE')
-                                                @csrf
-                                              </form>                                              
+                                              <a href="{{ route('admin.v1.access.user.destroy',$user->id) }}" onclick="return confirm('Confirm Delete')" class="dropdown-item">Delete</a>                                                                                            
                                             </div>
                                           </div>
                                         </td>

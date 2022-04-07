@@ -60,31 +60,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($datas as $data)
                                     <tr>
-                                        <td>{{($users->currentPage() - 1) * $users->perPage() + $loop->iteration}}</td>
-                                        <td>{{ $user->code }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
+                                        <td>{{($datas->currentPage() - 1) * $datas->perPage() + $loop->iteration}}</td>
+                                        <td>{{ $data->code }}</td>
+                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->email }}</td>
                                         <td>
-                                          @foreach($user->roles as $role)
+                                          @foreach($data->roles as $role)
                                             {{ $role->name }}
                                           @endforeach
                                         </td>
-                                        <td>{{ ucwords($user->status) }}</td>
-                                        <td align="center"><img src="{{ ($user->picture) ? route('admin.v1.access.user.file',$user->picture) : asset(config('access.media').'user/user.png') }}" width="100px" height="100px"/></td>
+                                        <td>{{ ucwords($data->status) }}</td>
+                                        <td align="center"><img src="{{ ($data->picture) ? route('admin.v1.access.user.file',$data->picture) : asset(config('access.media').'user/user.png') }}" width="100px" height="100px"/></td>
                                         <td align="center">
                                           <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                               Action
                                             </button>
                                             <div class="dropdown-menu">
-                                              <a href="{{ route('admin.v1.access.user.edit',$user->id) }}" class="dropdown-item">Edit</a>
-                                              <form action="{{ route('admin.v1.access.user.destroy',$user->id) }}" method="post">
-                                                <input type="submit" value="Delete" class="dropdown-item" onclick="return confirm('Confirm Delete')"/>
-                                                @method('DELETE')
-                                                @csrf
-                                              </form>                                              
+                                              <a href="{{ route('admin.v1.access.user.edit',$data->id) }}" class="dropdown-item">Edit</a>
+                                              <a href="{{ route('admin.v1.access.user.destroy',$data->id) }}" onclick="return confirm('Confirm Delete')" class="dropdown-item">Delete</a>                                              
                                             </div>
                                           </div>
                                         </td>
@@ -93,7 +89,7 @@
                               </tbody>
                         </table>
                         <div class="d-none d-sm-inline-block" style="float:right;">
-                          {!! $users->appends(request()->input())->links('vendor.pagination.bootstrap-4') !!}
+                          {!! $datas->appends(request()->input())->links('vendor.pagination.bootstrap-4') !!}
                         </div>          
                     </div>
                 </div>                

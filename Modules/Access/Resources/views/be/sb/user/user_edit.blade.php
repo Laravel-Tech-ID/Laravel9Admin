@@ -26,13 +26,13 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="overflow-x:auto;padding:20px;">
-                        <form method="POST" action="{{ route('admin.v1.access.user.update',$user->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.v1.access.user.update',$data->id) }}" enctype="multipart/form-data">
                             @csrf  
                             @method('PUT')
                             <div class="form-group row">
                                 <label for="code" class="col-md-3 col-form-label text-md-right">{{ __('Kode Pengguna') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="code" type="text" class="form-control form-control-user @error('code') is-invalid @enderror" name="code" value="{{ $user->code }}" autocomplete="code">
+                                    <input id="code" type="text" class="form-control form-control-user @error('code') is-invalid @enderror" name="code" value="{{ $data->code }}" autocomplete="code">
                                     @error('code')
                                         <span class="invalid-feedback" status="alert">
                                             <strong>{{ $message }}</strong>
@@ -43,7 +43,7 @@
                             <div class="form-group row">
                                 <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Nama') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ $data->name }}" required autocomplete="name" autofocus>
                                     @error('name')
                                         <span class="invalid-feedback" status="alert">
                                             <strong>{{ $message }}</strong>
@@ -54,7 +54,7 @@
                             <div class="form-group row">
                                 <label for="phone" class="col-md-3 col-form-label text-md-right">{{ __('Telepon') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="phone" type="text" class="form-control form-control-user @error('phone') is-invalid @enderror" name="phone" value="{{ $user->phone }}" autocomplete="phone">
+                                    <input id="phone" type="text" class="form-control form-control-user @error('phone') is-invalid @enderror" name="phone" value="{{ $data->phone }}" autocomplete="phone">
                                     @error('phone')
                                         <span class="invalid-feedback" status="alert">
                                             <strong>{{ $message }}</strong>
@@ -65,7 +65,7 @@
                             <div class="form-group row">
                                 <label for="email" class="col-md-3 col-form-label text-md-right">{{ __('Email') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
+                                    <input id="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ $data->email }}" required autocomplete="email">
                                     @error('email')
                                         <span class="invalid-feedback" status="alert">
                                             <strong>{{ $message }}</strong>
@@ -98,9 +98,9 @@
                             <div class="form-group row">
                                 <label for="status" class="col-md-3 col-form-label text-md-right">{{ __('Status') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <select name="status" id="status" class="form-control form-control-user @error('status') is-invalid @enderror" value="{{ $user->status }}" required autocomplete="status">
-                                        <option value="Active" {{ ($user->status == 'Active') ? 'selected' : '' }}>Active</option>
-                                        <option value="Inactive" {{ ($user->status == 'Inactive') ? 'selected' : '' }}>Inactive</option>
+                                    <select name="status" id="status" class="form-control form-control-user @error('status') is-invalid @enderror" value="{{ $data->status }}" required autocomplete="status">
+                                        <option value="Active" {{ ($data->status == 'Active') ? 'selected' : '' }}>Active</option>
+                                        <option value="Inactive" {{ ($data->status == 'Inactive') ? 'selected' : '' }}>Inactive</option>
                                     </select>
                                     @error('status')
                                         <span class="invalid-feedback" status="alert">
@@ -114,7 +114,7 @@
                                 <div class="col-md-8 mb-3 mb-sm-0 @error('role') rounded border border-danger @enderror">
                                     @foreach($roles as $role)
                                         <div class="col-md-13 mb-4 mb-sm-0" style="float: left; padding: 5px;">
-                                            <input id="role" type="checkbox" class="form-control-user @error('role') is-invalid @enderror" name="role[]" value="{{ $role->name }}" {{ ($user->roles->pluck('name')->contains($role->name)) ? 'checked' : '' }} autocomplete="role">
+                                            <input id="role" type="checkbox" class="form-control-user @error('role') is-invalid @enderror" name="role[]" value="{{ $role->name }}" {{ ($data->roles->pluck('name')->contains($role->name)) ? 'checked' : '' }} autocomplete="role">
                                             <label for="role" class="col-form-label" style="padding-bottom:5px;">{{ $role->name }}</label>
                                         </div>
                                     @endforeach
@@ -131,8 +131,8 @@
                             <div class="form-group row" style="margin-bottom: 60px;">
                                 <label for="picture" class="col-md-3 col-form-label text-md-right">{{ __('Foto') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0" style="text-align:center;padding:10px;">
-                                    <img src="{{ ($user->picture) ? route('admin.v1.access.user.file',$user->picture) : asset(config('access.media').'user/user.png') }}" width="100%" height="100%" style="padding:10px;"/>
-                                    <input id="picture" type="file" class="form-control form-control-user @error('picture') is-invalid @enderror" name="picture" value="{{ $user->picture }}" autocomplete="picture">
+                                    <img src="{{ ($data->picture) ? route('admin.v1.access.user.file',$data->picture) : asset(config('access.media').'user/user.png') }}" width="100%" height="100%" style="padding:10px;"/>
+                                    <input id="picture" type="file" class="form-control form-control-user @error('picture') is-invalid @enderror" name="picture" value="{{ $data->picture }}" autocomplete="picture">
                                     @error('picture')
                                         <span class="invalid-feedback" status="alert">
                                             <strong>{{ $message }}</strong>
@@ -144,7 +144,7 @@
                                 <label for="blocked" class="col-md-3 col-form-label text-md-right">{{ __('Blokir') }}</label>
                                 <div class="col-md-9 mb-3 mb-sm-0">
                                     <div class="col-md-13 mb-4 mb-sm-0" style="float: left; padding: 5px;">
-                                    <input id="blocked" type="checkbox" class="form-control-user @error('blocked_reason') is-invalid @enderror" name="blocked[]" value="{{ $user->blocked }}" autocomplete="blocked" {{ ($user->blocked) ? 'checked' : '' }}>
+                                    <input id="blocked" type="checkbox" class="form-control-user @error('blocked_reason') is-invalid @enderror" name="blocked[]" value="{{ $data->blocked }}" autocomplete="blocked" {{ ($data->blocked) ? 'checked' : '' }}>
                                     @error('blocked_reason')
                                         <span class="invalid-feedback" blocked_reason="alert">
                                             <strong>{{ $message }}</strong>
@@ -156,7 +156,7 @@
                             <div class="form-group row" id="div_blocked_reason">
                                 <label for="blocked_reason" class="col-md-3 col-form-label text-md-right">{{ __('Alasan Blokir') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="blocked_reason" type="text" class="form-control form-control-user @error('blocked_reason') is-invalid @enderror" name="blocked_reason" value="{{ $user->blocked_reason }}" autocomplete="blocked_reason">
+                                    <input id="blocked_reason" type="text" class="form-control form-control-user @error('blocked_reason') is-invalid @enderror" name="blocked_reason" value="{{ $data->blocked_reason }}" autocomplete="blocked_reason">
                                     @error('blocked_reason')
                                         <span class="invalid-feedback" blocked_reason="alert">
                                             <strong>{{ $message }}</strong>

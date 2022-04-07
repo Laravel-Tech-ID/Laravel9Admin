@@ -15,10 +15,10 @@ class SettingController extends Controller
         try{
             DB::beginTransaction();
             try{
-                $setting = Setting::first();
-                if($setting){
+                $data = Setting::first();
+                if($data){
                     DB::commit();
-                    return view('setting::'.config('app.be_view').'.setting_edit', compact('setting'));
+                    return view('setting::'.config('app.be_view').'.setting_edit', compact('data'));
                 }else{
                     DB::commit();
                     return view('setting::'.config('app.be_view').'.setting_create');

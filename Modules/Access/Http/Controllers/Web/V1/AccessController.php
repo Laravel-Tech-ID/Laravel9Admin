@@ -37,9 +37,9 @@ class AccessController extends Controller
             }
             //MASIH ADA PR MENGHAPUS ROUTE YG ADA DI DATABASE TAPI TIDAK ADA DI APLIKASI
             //TERMASUK KAITANNYA DENGAN USER ROLE
-            $accesses = Access::where('name','like','%'.$request['search'].'%')->orWhere('guard_name','like','%'.$request['search'].'%')->paginate(100);
+            $datas = Access::where('name','like','%'.$request['search'].'%')->orWhere('guard_name','like','%'.$request['search'].'%')->paginate(100);
             DB::commit();
-            return view('access::'.config('app.be_view').'.access.access_index',compact('accesses','search'));
+            return view('access::'.config('app.be_view').'.access.access_index',compact('datas','search'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->with('error', $err->getMessage());
@@ -92,9 +92,9 @@ class AccessController extends Controller
     {
         DB::beginTransaction();
         try{
-            $access = Access::find($id);
+            $data = Access::find($id);
             DB::commit();
-            return view('access::'.config('app.be_view').'.access.access_edit',compact('access'));
+            return view('access::'.config('app.be_view').'.access.access_edit',compact('data'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->with('error',$err->getMessage());

@@ -75,19 +75,19 @@
                             </thead>
                             <tbody>
                                 @csrf
-                                @foreach ($accesses as $access)
+                                @foreach ($datas as $data)
                                     <tr>
-                                        <td><input name="access[]" value="{{ $access->id }}" type="checkbox" /></td>
-                                        <td>{{($accesses->currentPage() - 1) * $accesses->perPage() + $loop->iteration}}</td>
-                                        <td>{{ $access->name }}</td>
-                                        <td>{{ $access->guard_name }}</td>
+                                        <td><input name="access[]" value="{{ $data->id }}" type="checkbox" /></td>
+                                        <td>{{($datas->currentPage() - 1) * $datas->perPage() + $loop->iteration}}</td>
+                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->guard_name }}</td>
                                         <td>
-                                        <center><img src="{{ ($role->hasAccess($access->name)) ? asset(config('access.media').'true.png') : asset(config('access.media').'false.png') }}" width="30px" height="30px"/></center>
+                                        <center><img src="{{ ($role->hasAccess($data->name)) ? asset(config('access.media').'true.png') : asset(config('access.media').'false.png') }}" width="30px" height="30px"/></center>
                                         </td>
                                         <td align="center">
-                                          <a href="{{ route('admin.v1.access.role.access.assign',['role' => $role->id,'access' => $access->id]) }}"
-                                          <button type="button" class="btn btn-sm btn-{{($role->hasAccess($access->name)) ? 'warning' : 'primary'}}" aria-haspopup="true" aria-expanded="false">
-                                          {{($role->hasAccess($access->name)) ? 'Revoke' : 'Assign'}}
+                                          <a href="{{ route('admin.v1.access.role.access.assign',['role' => $role->id,'access' => $data->id]) }}"
+                                          <button type="button" class="btn btn-sm btn-{{($role->hasAccess($data->name)) ? 'warning' : 'primary'}}" aria-haspopup="true" aria-expanded="false">
+                                          {{($role->hasAccess($data->name)) ? 'Revoke' : 'Assign'}}
                                           </button>
                                         </td>
                                     </tr>
@@ -96,7 +96,7 @@
                               </tbody>
                         </table>
                         <div class="d-none d-sm-inline-block" style="float:right;">
-                          {!! $accesses->appends(request()->input())->links('vendor.pagination.bootstrap-4') !!}
+                          {!! $datas->appends(request()->input())->links('vendor.pagination.bootstrap-4') !!}
                         </div>          
                       </div>
                   </div>                
