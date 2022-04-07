@@ -22,7 +22,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','app']],function(){
                 Route::post('store',[Modules\Access\Http\Controllers\Web\V1\RoleController::class, 'store'])->name('admin.v1.access.role.store');
                 Route::get('{id}/edit',[Modules\Access\Http\Controllers\Web\V1\RoleController::class, 'edit'])->name('admin.v1.access.role.edit');
                 Route::put('{id}/update',[Modules\Access\Http\Controllers\Web\V1\RoleController::class, 'update'])->name('admin.v1.access.role.update');    
-                Route::delete('{id}/delete',[Modules\Access\Http\Controllers\Web\V1\RoleController::class, 'destroy'])->name('admin.v1.access.role.destroy');    
+                Route::get('{id}/delete',[Modules\Access\Http\Controllers\Web\V1\RoleController::class, 'destroy'])->name('admin.v1.access.role.destroy');    
                 Route::group(['prefix' => 'access'], function(){
                     Route::get('{id}',[Modules\Access\Http\Controllers\Web\V1\RoleAccessController::class, 'index'])->name('admin.v1.access.role.access.index');
                     Route::get('assign/{role}/{access}',[Modules\Access\Http\Controllers\Web\V1\RoleAccessController::class, 'assign'])->name('admin.v1.access.role.access.assign');
@@ -37,7 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','app']],function(){
                 Route::get('{id}/edit',[Modules\Access\Http\Controllers\Web\V1\AccessController::class, 'edit'])->name('admin.v1.access.access.edit');
                 Route::put('{id}/update',[Modules\Access\Http\Controllers\Web\V1\AccessController::class, 'update'])->name('admin.v1.access.access.update');    
                 Route::get('{id}/delete',[Modules\Access\Http\Controllers\Web\V1\AccessController::class, 'destroy'])->name('admin.v1.access.access.destroy');    
-                // Route::delete('{id}/delete',[Modules\Access\Http\Controllers\Web\V1\AccessController::class, 'destroy'])->name('admin.v1.access.access.destroy');    
+                // Route::get('{id}/delete',[Modules\Access\Http\Controllers\Web\V1\AccessController::class, 'destroy'])->name('admin.v1.access.access.destroy');    
                 Route::get('status/{access}',[Modules\Access\Http\Controllers\Web\V1\AccessController::class, 'status'])->name('admin.v1.access.access.status');
                 Route::post('activateall',[Modules\Access\Http\Controllers\Web\V1\AccessController::class, 'activateall'])->name('admin.v1.access.access.activateall');
                 Route::post('inactivateall',[Modules\Access\Http\Controllers\Web\V1\AccessController::class, 'inactivateall'])->name('admin.v1.access.access.inactivateall');
@@ -49,7 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','app']],function(){
                 Route::post('store',[Modules\Access\Http\Controllers\Web\V1\UserController::class, 'store'])->name('admin.v1.access.user.store');
                 Route::get('{id}/edit',[Modules\Access\Http\Controllers\Web\V1\UserController::class, 'edit'])->name('admin.v1.access.user.edit');
                 Route::put('{id}/update',[Modules\Access\Http\Controllers\Web\V1\UserController::class, 'update'])->name('admin.v1.access.user.update');
-                Route::delete('{id}/delete',[Modules\Access\Http\Controllers\Web\V1\UserController::class, 'destroy'])->name('admin.v1.access.user.destroy');    
+                Route::get('{id}/delete',[Modules\Access\Http\Controllers\Web\V1\UserController::class, 'destroy'])->name('admin.v1.access.user.destroy');    
                 Route::get('{id}/file',[Modules\Access\Http\Controllers\Web\V1\UserController::class, 'file'])->name('admin.v1.access.user.file');
             });
         });

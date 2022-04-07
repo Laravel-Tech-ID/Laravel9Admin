@@ -40,23 +40,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($roles as $role)
+                                @foreach ($datas as $data)
                                     <tr>
-                                      <td>{{($roles->currentPage() - 1) * $roles->perPage() + $loop->iteration}}</td>
-                                        <td>{{ $role->name }}</td>
+                                      <td>{{($datas->currentPage() - 1) * $datas->perPage() + $loop->iteration}}</td>
+                                        <td>{{ $data->name }}</td>
                                         <td>
-                                        <center><img src="{{ ($role->status == 'Active') ? asset(config('access.media').'true.png') : asset(config('access.media').'false.png') }}" width="30px" height="30px"/></center>
+                                        <center><img src="{{ ($data->status == 'Active') ? asset(config('access.media').'true.png') : asset(config('access.media').'false.png') }}" width="30px" height="30px"/></center>
                                         </td>
-                                        <td>{{ $role->desc }}</td>
+                                        <td>{{ $data->desc }}</td>
                                         <td align="center">
                                           <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                               Action
                                             </button>
                                             <div class="dropdown-menu">
-                                              <a href="{{ route('admin.v1.access.role.access.index',$role->id) }}" class="dropdown-item">Access</a>
-                                              <a href="{{ route('admin.v1.access.role.edit',$role->id) }}" class="dropdown-item">Edit</a>
-                                              <a href="{{ route('admin.v1.access.role.destroy',$access->id) }}" onclick="return confirm('Confirm Delete')" class="dropdown-item">Delete</a>
+                                              <a href="{{ route('admin.v1.access.role.access.index',$data->id) }}" class="dropdown-item">Access</a>
+                                              <a href="{{ route('admin.v1.access.role.edit',$data->id) }}" class="dropdown-item">Edit</a>
+                                              <a href="{{ route('admin.v1.access.role.destroy',$data->id) }}" onclick="return confirm('Confirm Delete')" class="dropdown-item">Delete</a>
                                             </div>
                                           </div>
                                         </td>
@@ -65,7 +65,7 @@
                               </tbody>
                         </table>
                         <div class="d-none d-sm-inline-block" style="float:right;">
-                          {!! $roles->appends(request()->input())->links('vendor.pagination.bootstrap-4') !!}
+                          {!! $datas->appends(request()->input())->links('vendor.pagination.bootstrap-4') !!}
                         </div>
                       </div>
                   </div>                

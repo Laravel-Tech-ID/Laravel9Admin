@@ -16,7 +16,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','app']],function(){
         Route::group(['prefix' => 'profile'], function(){
             Route::get('edit',[Modules\Profile\Http\Controllers\Web\V1\ProfileController::class, 'edit'])->name('admin.v1.profile.edit');
             Route::put('update',[Modules\Profile\Http\Controllers\Web\V1\ProfileController::class, 'update'])->name('admin.v1.profile.update');
-            Route::delete('{id}/delete',[Modules\Profile\Http\Controllers\Web\V1\ProfileController::class, 'destroy'])->name('admin.v1.profile.destroy');
+            Route::get('{id}/delete',[Modules\Profile\Http\Controllers\Web\V1\ProfileController::class, 'destroy'])->name('admin.v1.profile.destroy');
             Route::get('{id}/file',[Modules\Profile\Http\Controllers\Web\V1\ProfileController::class, 'file'])->name('admin.v1.profile.file');
         });
     });

@@ -58,7 +58,7 @@
                             <div class="form-group row">
                                 <label for="desc" class="col-md-3 col-form-label text-md-right">{{ __('Description') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="desc" type="text" class="form-control form-control-user @error('desc') is-invalid @enderror" name="desc" value="{{ $data->desc }}" required autocomplete="desc" autofocus>
+                                    <input id="desc" type="text" class="form-control form-control-user @error('desc') is-invalid @enderror" name="desc" value="{{ $data->desc }}" autocomplete="desc" autofocus>
                                     @error('desc')
                                         <span class="invalid-feedback" status="alert">
                                             <strong>{{ $message }}</strong>

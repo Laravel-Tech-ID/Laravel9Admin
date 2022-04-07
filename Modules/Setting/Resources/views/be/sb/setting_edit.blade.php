@@ -32,7 +32,7 @@
                             <div class="form-group row">
                                 <label for="initial" class="col-md-3 col-form-label text-md-right">{{ __('Company Initial [initial]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="initial" type="text" class="form-control form-control-user @error('initial') is-invalid @enderror" name="initial" value="{{ $setting->initial }}" autocomplete="initial">
+                                    <input id="initial" type="text" class="form-control form-control-user @error('initial') is-invalid @enderror" name="initial" value="{{ $data->initial }}" autocomplete="initial">
                                     @error('initial')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -43,7 +43,7 @@
                             <div class="form-group row">
                                 <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Company Name [name]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ $setting->name }}" autocomplete="name">
+                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ $data->name }}" autocomplete="name">
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -54,7 +54,7 @@
                             <div class="form-group row">
                                 <label for="description" class="col-md-3 col-form-label text-md-right">{{ __('Description [description]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <textarea id="description" class="form-control form-control-user @error('description') is-invalid @enderror" name="description" autocomplete="description">{{ $setting->description }}</textarea>
+                                    <textarea id="description" class="form-control form-control-user @error('description') is-invalid @enderror" name="description" autocomplete="description">{{ $data->description }}</textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -65,10 +65,10 @@
                             <div class="form-group row" style="padding-bottom: 30px;">
                                 <label for="icon" class="col-md-3 col-form-label text-md-right">{{ __('Company Icon [icon]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0" style="text-align:center;padding:10px;">
-                                    @if($setting->icon)
-                                        <img src="{{ asset(config('setting.media').$setting->icon) }}" width="100%" height="100%" style="padding:10px;"/>
+                                    @if($data->icon)
+                                        <img src="{{ asset(config('setting.media').$data->icon) }}" width="100%" height="100%" style="padding:10px;"/>
                                     @endif
-                                    <input id="icon" type="file" class="form-control form-control-user @error('icon') is-invalid @enderror" name="icon" value="{{ $setting->icon }}" autocomplete="icon">
+                                    <input id="icon" type="file" class="form-control form-control-user @error('icon') is-invalid @enderror" name="icon" value="{{ $data->icon }}" autocomplete="icon">
                                     @error('icon')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -79,10 +79,10 @@
                             <div class="form-group row" style="padding-bottom: 30px;">
                                 <label for="logo" class="col-md-3 col-form-label text-md-right">{{ __('Company Logo [logo]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0" style="text-align:center;padding:10px;">
-                                    @if($setting->logo)
-                                        <img src="{{ asset(config('setting.media').$setting->logo) }}" width="100%" height="100%" style="padding:10px;"/>
+                                    @if($data->logo)
+                                        <img src="{{ asset(config('setting.media').$data->logo) }}" width="100%" height="100%" style="padding:10px;"/>
                                     @endif
-                                    <input id="logo" type="file" class="form-control form-control-user @error('logo') is-invalid @enderror" name="logo" value="{{ $setting->logo }}" autocomplete="logo">
+                                    <input id="logo" type="file" class="form-control form-control-user @error('logo') is-invalid @enderror" name="logo" value="{{ $data->logo }}" autocomplete="logo">
                                     @error('logo')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -93,10 +93,10 @@
                             <div class="form-group row" style="padding-bottom: 30px;">
                                 <label for="login_image" class="col-md-3 col-form-label text-md-right">{{ __('Login Image [login_image]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0" style="text-align:center;padding:10px;">
-                                    @if($setting->login_image)
-                                        <img src="{{ asset(config('setting.media').$setting->login_image) }}" width="100%" height="100%" style="padding:10px;"/>
+                                    @if($data->login_image)
+                                        <img src="{{ asset(config('setting.media').$data->login_image) }}" width="100%" height="100%" style="padding:10px;"/>
                                     @endif
-                                    <input id="login_image" type="file" class="form-control form-control-user @error('login_image') is-invalid @enderror" name="login_image" value="{{ $setting->login_image }}" autocomplete="login_image">
+                                    <input id="login_image" type="file" class="form-control form-control-user @error('login_image') is-invalid @enderror" name="login_image" value="{{ $data->login_image }}" autocomplete="login_image">
                                     @error('login_image')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -108,7 +108,7 @@
                             <div class="form-group row">
                                 <label for="phone" class="col-md-3 col-form-label text-md-right">{{ __('Phone [phone]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="phone" type="text" class="form-control form-control-user @error('phone') is-invalid @enderror" name="phone" value="{{ $setting->phone }}" autocomplete="phone">
+                                    <input id="phone" type="text" class="form-control form-control-user @error('phone') is-invalid @enderror" name="phone" value="{{ $data->phone }}" autocomplete="phone">
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -119,7 +119,7 @@
                             <div class="form-group row">
                                 <label for="address" class="col-md-3 col-form-label text-md-right">{{ __('Address [address]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="address" type="text" class="form-control form-control-user @error('address') is-invalid @enderror" name="address" value="{{ $setting->address }}" autocomplete="address">
+                                    <input id="address" type="text" class="form-control form-control-user @error('address') is-invalid @enderror" name="address" value="{{ $data->address }}" autocomplete="address">
                                     @error('address')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -131,7 +131,7 @@
                             <div class="form-group row">
                                 <label for="email" class="col-md-3 col-form-label text-md-right">{{ __('Email [email]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ $setting->email }}" autocomplete="email">
+                                    <input id="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ $data->email }}" autocomplete="email">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -142,7 +142,7 @@
                             <div class="form-group row">
                                 <label for="facebook" class="col-md-3 col-form-label text-md-right">{{ __('Facebook Link [facebook]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="facebook" type="text" class="form-control form-control-user @error('facebook') is-invalid @enderror" name="facebook" value="{{ $setting->facebook }}" autocomplete="facebook">
+                                    <input id="facebook" type="text" class="form-control form-control-user @error('facebook') is-invalid @enderror" name="facebook" value="{{ $data->facebook }}" autocomplete="facebook">
                                     @error('facebook')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -153,7 +153,7 @@
                             <div class="form-group row">
                                 <label for="twitter" class="col-md-3 col-form-label text-md-right">{{ __('Twitter Link [twitter]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="twitter" type="text" class="form-control form-control-user @error('twitter') is-invalid @enderror" name="twitter" value="{{ $setting->twitter }}" autocomplete="twitter">
+                                    <input id="twitter" type="text" class="form-control form-control-user @error('twitter') is-invalid @enderror" name="twitter" value="{{ $data->twitter }}" autocomplete="twitter">
                                     @error('twitter')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -164,7 +164,7 @@
                             <div class="form-group row">
                                 <label for="google" class="col-md-3 col-form-label text-md-right">{{ __('Google+ Link [google]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="google" type="text" class="form-control form-control-user @error('google') is-invalid @enderror" name="google" value="{{ $setting->google }}" autocomplete="google">
+                                    <input id="google" type="text" class="form-control form-control-user @error('google') is-invalid @enderror" name="google" value="{{ $data->google }}" autocomplete="google">
                                     @error('google')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -175,7 +175,7 @@
                             <div class="form-group row">
                                 <label for="instagram" class="col-md-3 col-form-label text-md-right">{{ __('Instagram Link [instagram]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="instagram" type="text" class="form-control form-control-user @error('instagram') is-invalid @enderror" name="instagram" value="{{ $setting->instagram }}" autocomplete="instagram">
+                                    <input id="instagram" type="text" class="form-control form-control-user @error('instagram') is-invalid @enderror" name="instagram" value="{{ $data->instagram }}" autocomplete="instagram">
                                     @error('instagram')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -187,7 +187,7 @@
                             <div class="form-group row">
                                 <label for="copyright" class="col-md-3 col-form-label text-md-right">{{ __('Copyright Text [copyright]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0" style="text-align:center;padding:10px;">
-                                    <input id="copyright" type="text" class="form-control form-control-user @error('copyright') is-invalid @enderror" name="copyright" value="{{ $setting->copyright }}" autocomplete="copyright">
+                                    <input id="copyright" type="text" class="form-control form-control-user @error('copyright') is-invalid @enderror" name="copyright" value="{{ $data->copyright }}" autocomplete="copyright">
                                     @error('copyright')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -199,7 +199,7 @@
                             <div class="form-group row">
                                 <label for="maps_key" class="col-md-3 col-form-label text-md-right">{{ __('Maps Key [maps_key]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="maps_key" type="text" class="form-control form-control-user @error('maps_key') is-invalid @enderror" name="maps_key" value="{{ $setting->maps_key }}" autocomplete="maps_key">
+                                    <input id="maps_key" type="text" class="form-control form-control-user @error('maps_key') is-invalid @enderror" name="maps_key" value="{{ $data->maps_key }}" autocomplete="maps_key">
                                     @error('maps_key')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -210,7 +210,7 @@
                             <div class="form-group row">
                                 <label for="latitude" class="col-md-3 col-form-label text-md-right">{{ __('Latitude [latitude]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="latitude" type="text" class="form-control form-control-user @error('latitude') is-invalid @enderror" name="latitude" value="{{ $setting->latitude }}" autocomplete="latitude">
+                                    <input id="latitude" type="text" class="form-control form-control-user @error('latitude') is-invalid @enderror" name="latitude" value="{{ $data->latitude }}" autocomplete="latitude">
                                     @error('latitude')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -221,7 +221,7 @@
                             <div class="form-group row">
                                 <label for="longitude" class="col-md-3 col-form-label text-md-right">{{ __('Longitude [longitude]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="longitude" type="text" class="form-control form-control-user @error('longitude') is-invalid @enderror" name="longitude" value="{{ $setting->longitude }}" autocomplete="longitude">
+                                    <input id="longitude" type="text" class="form-control form-control-user @error('longitude') is-invalid @enderror" name="longitude" value="{{ $data->longitude }}" autocomplete="longitude">
                                     @error('longitude')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -232,7 +232,7 @@
                             <div class="form-group row">
                                 <label for="api_key" class="col-md-3 col-form-label text-md-right">{{ __('API Key Mutasi Bank [api_key]') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="api_key" type="text" class="form-control form-control-user @error('api_key') is-invalid @enderror" name="api_key" value="{{ $setting->api_key }}" autocomplete="api_key">
+                                    <input id="api_key" type="text" class="form-control form-control-user @error('api_key') is-invalid @enderror" name="api_key" value="{{ $data->api_key }}" autocomplete="api_key">
                                     @error('api_key')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
