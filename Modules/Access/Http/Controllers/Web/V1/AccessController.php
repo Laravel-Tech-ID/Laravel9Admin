@@ -9,6 +9,7 @@ use Modules\Access\Entities\V1\Role;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Controller;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Facades\Auth;
 
 class AccessController extends Controller
 {
