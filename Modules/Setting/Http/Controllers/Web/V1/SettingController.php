@@ -98,7 +98,7 @@ class SettingController extends Controller
             );
 
             DB::commit();
-            return redirect(route('admin.v1.setting.index'));
+            return redirect(route('admin.v1.setting.index'))->with('success',config('app.message_store'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('error',$err->getMessage());
@@ -170,7 +170,7 @@ class SettingController extends Controller
                 $arrs
             );
             DB::commit();
-            return redirect(route('admin.v1.setting.index'));            
+            return redirect(route('admin.v1.setting.index'))->with('success',config('app.message_update'));            
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('error',$err->getMessage());

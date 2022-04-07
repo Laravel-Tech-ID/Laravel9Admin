@@ -97,7 +97,7 @@ class UserController extends Controller
             
             $user->assignRole($request['role']);    
             DB::commit();
-            return redirect(route('admin.v1.access.user.index'));
+            return redirect(route('admin.v1.access.user.index'))->with('success',config('app.message_store'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('error',$err->getMessage());
@@ -195,7 +195,7 @@ class UserController extends Controller
             $data->refreshRole($request['role']);
 
             DB::commit();
-            return redirect(route('admin.v1.access.user.index'));
+            return redirect(route('admin.v1.access.user.index'))->with('success',config('app.message_update'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('error',$err->getMessage());
@@ -216,12 +216,13 @@ class UserController extends Controller
                 Storage::delete(config('access.private').'user/'.$data->picture);
             }
             DB::commit();
-            return back()->with('success','Berhasil Dihapus');
+            return back()->with('success','Berhasil Dihapus')->with('success',config('app.message_destroy'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->with('error',$err->getMessage());
         }    
     }
+
     public function file($filename)
     {
         if(Storage::exists(config('access.private').'user/'.$filename)){

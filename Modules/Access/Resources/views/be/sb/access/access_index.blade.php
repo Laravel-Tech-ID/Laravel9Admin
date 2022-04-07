@@ -10,7 +10,6 @@
                     <div class="card-body" style="overflow-x:auto;padding:10px;">{!! session('success') !!}</div>
                 </div>
             @endif
-
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Access Management</h1>

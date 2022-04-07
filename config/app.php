@@ -47,8 +47,18 @@ return [
     'stagging_dev' => ['dev.domain.com'],
     'stagging_prod' => ['domain.com'],
     //LOCAL, DEVELOPMENT & PRODUCTION STAGGING
+    
+    //DEFAULT MESSAGE
+    'message_index' => '',
+    'message_edit' => '',
+    'message_store' => 'Data Created Successfully',
+    'message_update' => 'Data Updated Successfully',
+    'message_destroy' => 'Data Deleted Successfully',
+    'message_success' => 'Data Proceed Successfully',
+    'message_error' => 'Data Proceed Successfully',
+    //DEFAULT MESSAGE
+    
     /*
-
     /*
     |--------------------------------------------------------------------------
     | Application Name

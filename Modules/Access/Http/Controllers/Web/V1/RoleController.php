@@ -55,7 +55,7 @@ class RoleController extends Controller
                 ]
             );
             DB::commit();
-            return redirect(route('admin.v1.access.role.index'));
+            return redirect(route('admin.v1.access.role.index'))->with('success',config('app.message_store'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('status', $err->getMessage());
@@ -94,7 +94,7 @@ class RoleController extends Controller
                 ]
             );
             DB::commit();
-            return redirect(route('admin.v1.access.role.index'));
+            return redirect(route('admin.v1.access.role.index'))->with('success',config('app.message_update'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('status', $err->getMessage());
@@ -107,7 +107,7 @@ class RoleController extends Controller
         try{
             Role::find($id)->delete();
             DB::commit();
-            return redirect(route('admin.v1.access.role.index'));
+            return redirect(route('admin.v1.access.role.index'))->with('success',config('app.message_destroy'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('status', $err->getMessage());

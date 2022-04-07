@@ -100,7 +100,7 @@ class ProfileController extends Controller
             }
             $data->update($arr);
             DB::commit();
-            return back()->with('success','Profile Berhasil Diubah');
+            return back()->with('success',config('app.message_update'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('error',$err->getMessage());
@@ -123,7 +123,7 @@ class ProfileController extends Controller
             }
     
             DB::commit();
-            return back()->with('success','Berhasil Dihapus');
+            return back()->with('success',config('app.message_destroy'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->with('error',$err->getMessage());

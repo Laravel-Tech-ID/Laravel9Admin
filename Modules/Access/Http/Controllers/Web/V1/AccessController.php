@@ -81,7 +81,7 @@ class AccessController extends Controller
                 ]
             );
             DB::commit();
-            return redirect(route('admin.v1.access.access.index'));
+            return redirect(route('admin.v1.access.access.index'))->with('success',config('app.message_store'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('status', $err->getMessage());
@@ -122,7 +122,7 @@ class AccessController extends Controller
                 ]
             );
             DB::commit();
-            return redirect(route('admin.v1.access.access.index'));
+            return redirect(route('admin.v1.access.access.index'))->with('success',config('app.message_update'));
         }catch(\Exception $err){
             DB::rollback();
             return back()->withInput()->with('status', $err->getMessage());
