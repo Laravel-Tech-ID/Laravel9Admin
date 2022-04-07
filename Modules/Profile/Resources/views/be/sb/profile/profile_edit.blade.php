@@ -32,7 +32,7 @@
                             <div class="form-group row">
                                 <label for="code" class="col-md-3 col-form-label text-md-right">{{ __('Kode Pengguna') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="code" type="text" class="form-control form-control-user @error('code') is-invalid @enderror" name="code" value="{{ $user->code }}" autocomplete="code">
+                                    <input id="code" type="text" class="form-control form-control-user @error('code') is-invalid @enderror" name="code" value="{{ $data->code }}" autocomplete="code">
                                     @error('code')
                                         <span class="invalid-feedback" status="alert">
                                             <strong>{{ $message }}</strong>
@@ -43,7 +43,7 @@
                             <div class="form-group row">
                                 <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Nama') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ $data->name }}" required autocomplete="name" autofocus>
                                     @error('name')
                                         <span class="invalid-feedback" status="alert">
                                             <strong>{{ $message }}</strong>
@@ -54,7 +54,7 @@
                             <div class="form-group row">
                                 <label for="phone" class="col-md-3 col-form-label text-md-right">{{ __('Telepon') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="phone" type="text" class="form-control form-control-user @error('phone') is-invalid @enderror" name="phone" value="{{ $user->phone }}" autocomplete="phone">
+                                    <input id="phone" type="text" class="form-control form-control-user @error('phone') is-invalid @enderror" name="phone" value="{{ $data->phone }}" autocomplete="phone">
                                     @error('phone')
                                         <span class="invalid-feedback" status="alert">
                                             <strong>{{ $message }}</strong>
@@ -65,7 +65,7 @@
                             <div class="form-group row">
                                 <label for="email" class="col-md-3 col-form-label text-md-right">{{ __('Email') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
+                                    <input id="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ $data->email }}" required autocomplete="email">
                                     @error('email')
                                         <span class="invalid-feedback" status="alert">
                                             <strong>{{ $message }}</strong>
@@ -98,8 +98,8 @@
                             <div class="form-group row" style="margin-bottom: 60px;">
                                 <label for="picture" class="col-md-3 col-form-label text-md-right">{{ __('Foto') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0" style="text-align:center;padding:10px;">
-                                    <img src="{{ ($user->picture) ? route('admin.v1.access.user.file',$user->picture) : asset(config('access.media').'user/user.png') }}" width="100%" height="100%" style="padding:10px;"/>
-                                    <input id="picture" type="file" class="form-control form-control-user @error('picture') is-invalid @enderror" name="picture" value="{{ $user->picture }}" autocomplete="picture">
+                                    <img src="{{ ($data->picture) ? route('admin.v1.access.user.file',$data->picture) : asset(config('access.media').'user/user.png') }}" width="100%" height="100%" style="padding:10px;"/>
+                                    <input id="picture" type="file" class="form-control form-control-user @error('picture') is-invalid @enderror" name="picture" value="{{ $data->picture }}" autocomplete="picture">
                                     @error('picture')
                                         <span class="invalid-feedback" status="alert">
                                             <strong>{{ $message }}</strong>
