@@ -97,8 +97,8 @@
                             </div>
                             <div class="form-group row" style="margin-bottom: 60px;">
                                 <label for="picture" class="col-md-3 col-form-label text-md-right">{{ __('Foto') }}</label>
-                                <div class="col-md-8 mb-3 mb-sm-0" style="text-align:center;padding:10px;">
-                                    <img src="{{ ($data->picture) ? route('admin.v1.access.user.file',$data->picture) : asset(config('access.media').'user/user.png') }}" width="100%" height="100%" style="padding:10px;"/>
+                                <div class="col-md-8 mb-3 mb-sm-0" style="text-align:left;padding:10px;">
+                                    <img src="{{ ($data->picture) ? route('admin.v1.access.user.file',$data->picture) : asset(config('access.media').'user/user.png') }}" width="150px" height="150px" style="padding:10px;"/>
                                     <input id="picture" type="file" class="form-control form-control-user @error('picture') is-invalid @enderror" name="picture" value="{{ $data->picture }}" autocomplete="picture">
                                     @error('picture')
                                         <span class="invalid-feedback" status="alert">
@@ -108,7 +108,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-6 offset-md-12">
+                                <div class="col-md-12 offset-md-12">
                                     <button type="submit" class="btn btn-user btn-primary btn-block">
                                         {{ __('Save') }}
                                     </button>

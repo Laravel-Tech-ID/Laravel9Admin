@@ -144,7 +144,7 @@
                                 <label for="blocked" class="col-md-3 col-form-label text-md-right">{{ __('Blokir') }}</label>
                                 <div class="col-md-9 mb-3 mb-sm-0">
                                     <div class="col-md-13 mb-4 mb-sm-0" style="float: left; padding: 5px;">
-                                    <input id="blocked" type="checkbox" class="form-control-user @error('blocked_reason') is-invalid @enderror" name="blocked[]" value="{{ $data->blocked }}" autocomplete="blocked" {{ ($data->blocked) ? 'checked' : '' }}>
+                                    <input id="blocked" type="checkbox" class="form-control-user @error('blocked_reason') is-invalid @enderror" name="blocked" value="{{ $data->blocked }}" autocomplete="blocked" {{ ($data->blocked) ? 'checked' : '' }} {{ (old('blocked')) ? 'checked' : '' }}>
                                     @error('blocked_reason')
                                         <span class="invalid-feedback" blocked_reason="alert">
                                             <strong>{{ $message }}</strong>
@@ -183,9 +183,7 @@
         </div>
         <script>
         $(document).ready(function(){
-            var blocked = $('#blocked').val();
-            console.log(blocked);
-            if(blocked == 1){
+            if($('#blocked').val()){
                 $('#div_blocked_reason').show();
             }else{
                 $('#div_blocked_reason').hide();

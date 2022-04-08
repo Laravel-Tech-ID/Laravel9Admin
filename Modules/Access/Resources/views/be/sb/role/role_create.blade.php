@@ -43,8 +43,8 @@
                                 <label for="status" class="col-md-3 col-form-label text-md-right">{{ __('Status') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
                                     <select name="status" id="status" class="form-control form-control-user @error('status') is-invalid @enderror" value="{{ old('status') }}" required autocomplete="status">
-                                        <option value="Active">Active</option>
-                                        <option value="Inactive">Inactive</option>
+                                        <option value="Active" {{ (old('status') == 'Active') ? 'selected' : '' }}>Active</option>
+                                        <option value="Inactive" {{ (old('status') == 'Inactive') ? 'selected' : '' }}>Inactive</option>
                                     </select>
                                     @error('status')
                                         <span class="invalid-feedback" status="alert">

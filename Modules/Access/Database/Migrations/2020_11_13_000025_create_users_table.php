@@ -32,8 +32,8 @@ class CreateUsersTable extends Migration
             $table->string('password', 100)->nullable()->default(null);
             $table->string('status', 10)->nullable()->default(null);
             $table->string('picture', 200)->nullable()->default(null);
-            $table->string('blocked', 3)->nullable()->default(null);
-            $table->string('blocked_reason')->nullable()->default(null);
+            $table->string('blocked', 3)->nullable()->default(0);
+            $table->string('blocked_reason')->nullable()->default('');
             $table->rememberToken();
             $table->uuid('created_by')->nullable()->default(null);
             $table->uuid('updated_by')->nullable()->default(null);

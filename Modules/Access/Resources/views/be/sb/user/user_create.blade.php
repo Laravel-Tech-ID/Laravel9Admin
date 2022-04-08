@@ -77,7 +77,7 @@
                             <div class="form-group row">
                                 <label for="password" class="col-md-3 col-form-label text-md-right">{{ __('Password') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">    
+                                    <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="new-password">    
                                     @error('password')
                                         <span class="invalid-feedback" status="alert">
                                             <strong>{{ $message }}</strong>
@@ -86,9 +86,9 @@
                                 </div>
                             </div>    
                             <div class="form-group row">
-                                <label for="password-confirm" class="col-md-3 col-form-label text-md-right">{{ __('Ulangi Password') }}</label>
+                                <label for="password_confirmation" class="col-md-3 col-form-label text-md-right">{{ __('Ulangi Password') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                    <input id="password_confirmation" type="password" class="form-control" name="password_confirmation"  value="{{ old('password_confirmation') }}" required autocomplete="new-password">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -110,7 +110,7 @@
                                 <div class="col-md-8 mb-3 mb-sm-0 @error('role') rounded border border-danger @enderror">
                                     @foreach($roles as $role)
                                         <div class="col-md-13 mb-4 mb-sm-0" style="float: left; padding: 5px;">
-                                            <input id="role" type="checkbox" class="form-control-user @error('role') is-invalid @enderror" name="role[]" value="{{ $role->name }}" {{ (old('role') == $role->name) ? 'checked' : '' }} autocomplete="role">
+                                            <input id="role" type="checkbox" class="form-control-user @error('role') is-invalid @enderror" name="role[]" value="{{ $role->name }}" {{ (is_array(old('role')) && (in_array($role->name, old('role')))) ? 'checked' : '' }} autocomplete="role">
                                             <label for="role" class="col-form-label" style="padding-bottom:5px;">{{ $role->name }}</label>
                                         </div>
                                     @endforeach
@@ -139,7 +139,7 @@
                                 <label for="blocked" class="col-md-3 col-form-label text-md-right">{{ __('Blokir') }}</label>
                                 <div class="col-md-9 mb-3 mb-sm-0">
                                     <div class="col-md-13 mb-4 mb-sm-0" style="float: left; padding: 5px;">
-                                    <input id="blocked" type="checkbox" class="form-control-user @error('blocked') is-invalid @enderror" name="blocked[]" autocomplete="blocked">
+                                    <input id="blocked" type="checkbox" class="form-control-user @error('blocked') is-invalid @enderror" name="blocked" value="{{ old('blocked') }}" {{ old('blocked') ? 'checked' : '' }} autocomplete="blocked">
                                     </div>
                                     @error('blocked')
                                         <span class="invalid-feedback" blocked="alert">
@@ -177,8 +177,12 @@
             </div>
         </div>
     <script>
-        $(document).ready(function(){
-            $('#div_blocked_reason').hide();
+        $(document).ready(function(){            
+            if($('#blocked').val()){
+                $('#div_blocked_reason').show();
+            }else{
+                $('#div_blocked_reason').hide();
+            }
             $('#blocked').click(function(){
                 if(this.checked){
                     $('#div_blocked_reason').show();

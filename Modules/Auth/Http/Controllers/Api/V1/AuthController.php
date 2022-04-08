@@ -21,11 +21,11 @@ class AuthController extends Controller
                 return Response::true(data: $this->respondWithToken($token)->original);    
             }
         }catch(\Exception $err){
-            if($err->getCode() || $err->getCode() !== null){
+            if(in_array($err->getCode(),Response::$messages)){
                 $function = "_".$err->getCode();
-                return Response::$function(message: $err->getMessage());    
+                return Response::$function();
             }else{
-                return Response::false(message: $err->getMessage());
+                return Response::false(message: $err->getMessage(), error_code: $err->getCode());
             }
         }
     }
@@ -44,19 +44,20 @@ class AuthController extends Controller
                 DB::commit();
                 return Response::true(data: $data);
             }else{
-                if(is_object($data) && get_class($data) == 'Exception'){
-                    throw new Exception($result->getMessage(),500);
+                if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                    throw new Exception($data->getMessage(),$data->getCode());
                 }else{
                     throw new Exception("",404);
                 }    
             }
         }catch(\Exception $err){
             DB::rollback();
-            if($err->getCode() !== 0|| $err->getCode() !== null){
+            if(in_array($err->getCode(),Response::$messages)){
+                // dd('Satu');
                 $function = "_".$err->getCode();
-                return Response::$function(message: $err->getMessage());    
+                return Response::$function();
             }else{
-                return Response::false(message: $err->getMessage());
+                return Response::false(message: $err->getMessage(), error_code: $err->getCode());
             }
         }
     }
@@ -66,21 +67,22 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout()
+    public function logout(Request $request)
     {
         try{
             $result = auth('api')->logout();
-            if(is_object($result) && get_class($result) == 'Exception'){
-                throw new Exception($result->getMessage(),500);
+            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException' || get_class($result) == 'ErrorException')){
+                throw new Exception($data->getMessage(),$data->getCode());
             }else{
                 return Response::true();
             }
         }catch(\Exception $err){
-            if($err->getCode() || $err->getCode() !== null){
+            if(in_array($err->getCode(),Response::$messages)){
+                // dd('Satu');
                 $function = "_".$err->getCode();
-                return Response::$function(message: $err->getMessage());    
+                return Response::$function();
             }else{
-                return Response::false(message: $err->getMessage());
+                return Response::false(message: $err->getMessage(), error_code: $err->getCode());
             }
         }
     }
@@ -94,17 +96,18 @@ class AuthController extends Controller
     {
         try{
             $result = $this->respondWithToken(auth('api')->refresh());
-            if(is_object($result) && get_class($result) == 'Exception'){
-                throw new Exception($result->getMessage(),500);
+            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException' || get_class($result) == 'ErrorException')){
+                throw new Exception($data->getMessage(),$data->getCode());
             }else{
                 return Response::true(data: $result->original);
             }    
         }catch(\Exception $err){
-            if($err->getCode() || $err->getCode() !== null){
+            if(in_array($err->getCode(),Response::$messages)){
+                // dd('Satu');
                 $function = "_".$err->getCode();
-                return Response::$function(message: $err->getMessage());    
+                return Response::$function();
             }else{
-                return Response::false(message: $err->getMessage());
+                return Response::false(message: $err->getMessage(), error_code: $err->getCode());
             }
         }
     }

@@ -64,9 +64,9 @@
                             </div>
                             <div class="form-group row" style="padding-bottom: 30px;">
                                 <label for="icon" class="col-md-3 col-form-label text-md-right">{{ __('Company Icon [icon]') }}</label>
-                                <div class="col-md-8 mb-3 mb-sm-0" style="text-align:center;padding:10px;">
+                                <div class="col-md-8 mb-3 mb-sm-0" style="text-align:left;padding:10px;">
                                     @if($data->icon)
-                                        <img src="{{ asset(config('setting.media').$data->icon) }}" width="100%" height="100%" style="padding:10px;"/>
+                                        <img src="{{ asset(config('setting.media').$data->icon) }}" width="150px" height="150px" style="padding:10px;"/>
                                     @endif
                                     <input id="icon" type="file" class="form-control form-control-user @error('icon') is-invalid @enderror" name="icon" value="{{ $data->icon }}" autocomplete="icon">
                                     @error('icon')
@@ -78,9 +78,9 @@
                             </div>                            
                             <div class="form-group row" style="padding-bottom: 30px;">
                                 <label for="logo" class="col-md-3 col-form-label text-md-right">{{ __('Company Logo [logo]') }}</label>
-                                <div class="col-md-8 mb-3 mb-sm-0" style="text-align:center;padding:10px;">
+                                <div class="col-md-8 mb-3 mb-sm-0" style="text-align:left;padding:10px;">
                                     @if($data->logo)
-                                        <img src="{{ asset(config('setting.media').$data->logo) }}" width="100%" height="100%" style="padding:10px;"/>
+                                        <img src="{{ asset(config('setting.media').$data->logo) }}" width="150px" height="150px" style="padding:10px;"/>
                                     @endif
                                     <input id="logo" type="file" class="form-control form-control-user @error('logo') is-invalid @enderror" name="logo" value="{{ $data->logo }}" autocomplete="logo">
                                     @error('logo')
@@ -92,9 +92,9 @@
                             </div>                            
                             <div class="form-group row" style="padding-bottom: 30px;">
                                 <label for="login_image" class="col-md-3 col-form-label text-md-right">{{ __('Login Image [login_image]') }}</label>
-                                <div class="col-md-8 mb-3 mb-sm-0" style="text-align:center;padding:10px;">
+                                <div class="col-md-8 mb-3 mb-sm-0" style="text-align:left;padding:10px;">
                                     @if($data->login_image)
-                                        <img src="{{ asset(config('setting.media').$data->login_image) }}" width="100%" height="100%" style="padding:10px;"/>
+                                        <img src="{{ asset(config('setting.media').$data->login_image) }}" width="150px" height="150px" style="padding:10px;"/>
                                     @endif
                                     <input id="login_image" type="file" class="form-control form-control-user @error('login_image') is-invalid @enderror" name="login_image" value="{{ $data->login_image }}" autocomplete="login_image">
                                     @error('login_image')
@@ -186,7 +186,7 @@
                       
                             <div class="form-group row">
                                 <label for="copyright" class="col-md-3 col-form-label text-md-right">{{ __('Copyright Text [copyright]') }}</label>
-                                <div class="col-md-8 mb-3 mb-sm-0" style="text-align:center;padding:10px;">
+                                <div class="col-md-8 mb-3 mb-sm-0" style="text-align:left;padding:10px;">
                                     <input id="copyright" type="text" class="form-control form-control-user @error('copyright') is-invalid @enderror" name="copyright" value="{{ $data->copyright }}" autocomplete="copyright">
                                     @error('copyright')
                                         <span class="invalid-feedback" role="alert">
@@ -241,7 +241,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-6 offset-md-12">
+                                <div class="col-md-12 offset-md-12">
                                     <button type="submit" class="btn btn-user btn-primary btn-block">
                                         {{ __('Save') }}
                                     </button>

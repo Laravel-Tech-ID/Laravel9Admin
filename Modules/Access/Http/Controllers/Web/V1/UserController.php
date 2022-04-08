@@ -2,36 +2,61 @@
 
 namespace Modules\Access\Http\Controllers\Web\V1;
 
-use Carbon\Carbon;
-use Ramsey\Uuid\Uuid;
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\DB;
-use Modules\Access\Entities\V1\User;
-use Modules\Access\Entities\V1\Role;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use File;
-// use Illuminate\Support\Facades\Auth;
-use Storage;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Modules\Access\Http\Requests\V1\AccessUserRequest;
+use Modules\Access\Http\Services\V1\AccessUserService;
+use Exception;
+use Validator;
 
 class UserController extends Controller
 {
-    public function index(Request $request){
-        DB::beginTransaction();
+    public function index(Request $request, AccessUserService $service)
+    {
         try{
-            $search = $request['search'];
-            $datas = User::
-            where('code','like','%'.$search.'%')
-            ->orWhere('name','like','%'.$search.'%')
-            ->orWhere('phone','like','%'.$search.'%')
-            ->orWhere('email','like','%'.$search.'%')
-            ->orWhere('status','like','%'.$search.'%')
-            ->paginate(10);
-            DB::commit();
-            return view('access::'.config('app.be_view').'.user.user_index',compact('datas','search'));
+            if(!isset($request->q_paging)){
+                $q_paging = 10;
+            }else{
+                $q_paging = $request->q_paging;
+            }
+
+            $q_code = $request->q_code;
+            $q_name = $request->q_name;
+            $q_phone = $request->q_phone;
+            $q_email = $request->q_email;
+            $q_role = $request->q_role;
+            $q_status = $request->q_status;
+
+            $result = $service->index(
+                $q_paging,
+                $q_code,
+                $q_name,
+                $q_phone,
+                $q_email,
+                $q_role,
+                $q_status
+            );
+
+            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+                throw new Exception($result->getMessage(),$result->getCode());
+            }else{
+                $datas = $result['datas'];
+                $roles = $result['roles'];
+                return view('access::'.config('app.be_view').'.user.user_index',compact(
+                    'datas',
+                    'roles',
+                    'q_paging',
+                    'q_code',
+                    'q_name',
+                    'q_phone',
+                    'q_email',
+                    'q_role',
+                    'q_status'
+                ));
+            }
+
         }catch(\Exception $err){
-            DB::rollback();
             return back()->with('error',$err->getMessage());
         }
     }
@@ -39,17 +64,18 @@ class UserController extends Controller
      * Show the form for creating a new resource.
      * @return Renderable
      */
-    public function create()
+    public function create(AccessUserService $service)
     {
-        DB::beginTransaction();
         try{
-            $roles = Role::all();
-            DB::commit();
-            return view('access::'.config('app.be_view').'.user.user_create',compact('roles'));
+            $roles = $service->create();
+            if(is_object($roles) && (get_class($roles) == 'Exception' || get_class($roles) == 'Illuminate\Database\QueryException' || get_class($roles) == 'ErrorException')){
+                throw new Exception($roles->getMessage(),$roles->getCode());
+            }else{
+                return view('access::'.config('app.be_view').'.user.user_create',compact('roles'));
+            }
         }catch(\Exception $err){
-            DB::rollback();
-            return back()->with('error',$err->getMessage());
-        }    
+            return back()->withInput()->with('error',$err->getMessage());
+        }
     }
 
     /**
@@ -57,93 +83,57 @@ class UserController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(Request $request, AccessUserService $service)
     {
-        $validateData =  $request->validate([
-            'code' => ['max:20'],
-            'name' => ['required', 'string', 'max:50'],
-            'phone' => ['required', 'string', 'max:15'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'status' => ['string', 'max:10'],
-            'role' => ['required', 'array', 'min:1'],
-            'picture' => ['file', 'image', 'max:'.config('app.max_image')],
-            'blocked' => ['required_with:blocked_reason'],
-            'blocked_reason' => ['required_with:blocked,true','max:255'],
-        ]);
-        DB::beginTransaction();
         try{
-            $uuid = Uuid::uuid6();
-            $arr = [
-                'id' => $uuid,
-                'code' => $request['code'],
-                'name' => $request['name'],
-                'phone' => $request['phone'],
-                'email' => $request['email'],
-                'password' => Hash::make($request['password']),
-                'status' => $request['status'],
-                'blocked' => ($request->has('blocked')) ? 1 : 0,
-                'blocked_reason' => $request['blocked_reason'],
-                'created_at' => Carbon::now()->toDateTimeString()
-            ];
-            if($request->has('picture')){
-                $file_1 = $request['picture'];
-                $file_name_1 = $uuid.'.'.$file_1->getClientOriginalExtension();
-                $file_1->storeAs(config('access.private').'user',$file_name_1);
-                $arr = array_merge($arr,['picture' => $file_name_1]);
+            $rules = (new AccessUserRequest)->rules();
+            $request->merge(
+                [
+                    'blocked' => ($request->has('blocked')) ? 1 : 0,
+                    'created_by' => Auth::user()->id
+                ],
+            );
+            $validator = Validator::make($request->all(),$rules);
+            if ($validator->fails()){
+                return back()->withInput()->withErrors($validator);
+            }else{
+                try{
+                    $data = $service->store($request->all());
+                    if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                        throw new Exception($data->getMessage(),$data->getCode());
+                    }else{
+                        return redirect(route('admin.v1.access.user.index'))->with('success',config('app.message_store'));
+                    }
+                }catch(\Exception $err){
+                    return back()->withInput()->with('error',$err->getMessage());
+                }
             }
-
-            $user = User::create($arr);
-            
-            $user->assignRole($request['role']);    
-            DB::commit();
-            return redirect(route('admin.v1.access.user.index'))->with('success',config('app.message_store'));
         }catch(\Exception $err){
-            DB::rollback();
             return back()->withInput()->with('error',$err->getMessage());
         }           
     }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show(Request $request, $id)
-    {
-        DB::beginTransaction();
-        try{
-            $search = $request['search'];
-            $users = User::
-            where('code','like','%'.$search.'%')
-            ->orWhere('name','like','%'.$search.'%')
-            ->orWhere('phone','like','%'.$search.'%')
-            ->orWhere('email','like','%'.$search.'%')
-            ->orWhere('status','like','%'.$search.'%')
-            ->paginate(10);
-            DB::commit();
-            return view('access::user.user_show', compact('users','search'));
-        }catch(\Exception $err){
-            DB::rollback();
-            return back()->with('error',$err->getMessage());
-        }        }
 
     /**
      * Show the form for editing the specified resource.
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit(ProfileService $service, $id)
     {
-        DB::beginTransaction();
         try{
-            $roles = Role::all();
-            $data = User::find($id);
-            DB::commit();
-            return view('access::'.config('app.be_view').'.user.user_edit', compact('data','roles'));
+            $datas = $service->edit($id);
+            $data = $datas['data'];
+            $roles = $datas['roles'];
+            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                throw new Exception($data->getMessage(),$data->getCode());
+            }else{
+                return view('access::'.config('app.be_view').'.user.user_edit', compact(
+                    'data',
+                    'roles'
+                ));
+            }
         }catch(\Exception $err){
-            DB::rollback();
-            return back()->with('error',$err->getMessage());
+            return back()->withInput()->with('error',$err->getMessage());
         }
     }
 
@@ -153,53 +143,35 @@ class UserController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    
+    public function update(Request $request, AccessUserService $service, $id)
     {
-        $validateData =  $request->validate([
-            'code' => ['max:20'],
-            'name' => ['required', 'string', 'max:50'],
-            'phone' => ['required', 'string', 'max:15'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email,'.$id.',id'],
-            'password' => ['nullable','string','min:8','confirmed'],
-            'status' => ['string', 'max:10'],
-            'role' => ['required', 'array', 'min:1'],
-            'picture' => ['file', 'image', 'max:'.config('app.max_image')],
-            'blocked' => ['required_with:blocked_reason'],
-            'blocked_reason' => ['required_with:blocked,true','max:255'],
-        ]);
-        DB::beginTransaction();
         try{
-            $arr = [
-                'code' => $request['code'],
-                'name' => $request['name'],
-                'phone' => $request['phone'],
-                'email' => $request['email'],
-                'status' => $request['status'],
-                'blocked' => ($request->has('blocked')) ? 1 : 0,
-                'blocked_reason' => $request['blocked_reason'],
-                'updated_at' => Carbon::now()->toDateTimeString()
-            ];
-            
-            $data = User::find($id);
-            if($request->has('picture')){
-                Storage::delete(config('access.private').'user/'.$data->picture);
-                $file_1 = $request['picture'];
-                $file_name_1 = $id.'.'.$file_1->getClientOriginalExtension();
-                $file_1->storeAs(config('access.private').'user',$file_name_1);
-                $arr = array_merge($arr,['picture' => $file_name_1]);
+            $rules = (new AccessUserRequest)->rules($id);
+            $request->merge(
+                [
+                    'blocked' => ($request->has('blocked')) ? 1 : 0,
+                    'created_by' => Auth::user()->id
+                ],
+            );
+            $validator = Validator::make($request->all(),$rules);
+            if ($validator->fails()){
+                return back()->withInput()->withErrors($validator);
+            }else{
+                try{
+                    $data = $service->update($request->all(), $id);
+                    if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                        throw new Exception($data->getMessage(),$data->getCode());
+                    }else{
+                        return redirect(route('admin.v1.access.user.index'))->with('success',config('app.message_update'));
+                    }
+                }catch(\Exception $err){
+                    return back()->withInput()->with('error',$err->getMessage());
+                }
             }
-            if($request->filled('password')){
-                $arr = array_merge($arr,['password' => Hash::make($request['password'])]);
-            }
-            $data->update($arr);
-            $data->refreshRole($request['role']);
-
-            DB::commit();
-            return redirect(route('admin.v1.access.user.index'))->with('success',config('app.message_update'));
         }catch(\Exception $err){
-            DB::rollback();
             return back()->withInput()->with('error',$err->getMessage());
-        }                   
+        }           
     }
 
     /**
@@ -207,35 +179,39 @@ class UserController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(AccessUserService $service, $id)
     {
-        DB::beginTransaction();
         try{
-            $data = User::find($id);
-            if($data->delete()){
-                Storage::delete(config('access.private').'user/'.$data->picture);
+            $data = $service->destroy($id);
+            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                throw new Exception($data->getMessage(),$data->getCode());
+            }else{
+                return back()->with('success',config('app.message_destroy'));
             }
-            DB::commit();
-            return back()->with('success','Berhasil Dihapus')->with('success',config('app.message_destroy'));
         }catch(\Exception $err){
-            DB::rollback();
             return back()->with('error',$err->getMessage());
-        }    
+        }
     }
 
-    public function file($filename)
+    public function destroy_selected(Request $request, AccessUserService $service)
     {
-        if(Storage::exists(config('access.private').'user/'.$filename)){
-            return file_show(config('access.private').'user/'.$filename);
+        try{
+            foreach($request->selected as $id){
+                $service->destroy($id);
+            }
+            return back()->with('success',config('app.message_destroy'));
+        }catch(\Exception $err){
+            return back()->with('error',$err->getMessage());
         }
-        return abort(404);
+    }
+
+    public function file(AccessUserService $service, $filename)
+    {
+        return $service->file($filename);
     }    
 
-    public function image($filename)
+    public function image(AccessUserService $service, $filename)
     {
-        if(Storage::exists(config('access.private').'user/'.$filename)){
-            return file_show(config('access.private').'user/'.$filename);
-        }
-        return abort(404);
+        return $service->file($filename);
     }    
 }

@@ -3,81 +3,97 @@
 namespace Modules\Access\Http\Controllers\Web\V1;
 
 use Illuminate\Http\Request;
-use DB;
-use Illuminate\Support\Facades\Route;
-use Modules\Access\Entities\V1\Access;
-use Modules\Access\Entities\V1\Role;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Modules\Access\Http\Requests\V1\AccessRoleAccessRequest;
+use Modules\Access\Http\Services\V1\AccessRoleAccessService;
+use Exception;
+use Validator;
 
 class RoleAccessController extends Controller
 {
-    public function index(Request $request, $id)
+    public function index(Request $request, AccessRoleAccessService $service, $id)
     {
-        DB::beginTransaction();
         try{
-            $search = $request['search'];
-            $role = Role::find($id);
-            $datas = Access::where('name','like','%'.$request['search'].'%')->orWhere('guard_name','like','%'.$request['search'].'%')->paginate(100);
-            DB::commit();
-            return view('access::'.config('app.be_view').'.role.access.access_index',compact('datas','role','search'));
+            if(!isset($request->q_paging)){
+                $q_paging = 10;
+            }else{
+                $q_paging = $request->q_paging;
+            }
+
+            $q_name = $request->q_name;
+            $q_guard_name = $request->q_guard_name;
+            $q_status = $request->q_status;
+
+            $result = $service->index(
+                $id,
+                $q_paging,
+                $q_name,
+                $q_guard_name,
+                $q_status
+            );
+
+            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+                throw new Exception($result->getMessage(),$result->getCode());
+            }else{
+                $datas = $result['datas'];
+                $guards = $result['guards'];
+                $role = $result['role'];
+                return view('access::'.config('app.be_view').'.role.access.access_index',compact(
+                    'datas',
+                    'guards',
+                    'role',
+                    'q_paging',
+                    'q_name',
+                    'q_guard_name',
+                    'q_status',
+                ));    
+            }
         }catch(\Exception $err){
-            DB::rollback();
             return back()->with('error', $err->getMessage());
         }
     }
 
-    public function assign($role, $access)
+
+    public function assign(AccessRoleAccessService $service, $role, $access)
     {
-        DB::beginTransaction();
         try{
-            $roleres = Role::find($role);
-            $accessres = Access::where('id',$access)->value('name');
-            if($roleres->hasAccess($accessres)){
-                $roleres->revokeAccess($accessres);
+            $data = $service->assign($role, $access);
+            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                throw new Exception($data->getMessage(),$data->getCode());
             }else{
-                $roleres->assignAccess($accessres);
+                return back()->with('success', config('app.message_success'));            
             }
-            DB::commit();
-            return back()->with('success', 'Berhasil Diaktivasi');            
         }catch(\Exception $err){
-            DB::rollback();
+            return back()->withInput()->with('error',$err->getMessage());
+        }
+    }
+
+    public function assign_selected(Request $request, AccessRoleAccessService $service, $role)
+    {
+        try{
+            $data = $service->assign_selected($request->selected, $role);
+            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                throw new Exception($data->getMessage(),$data->getCode());
+            }else{
+                return back()->with('success', config('app.message_success'));            
+            }
+        }catch(\Exception $err){
             return back()->with('error', $err->getMessage());            
         }
     }
 
-    public function assignall(Request $request, $role){
-        DB::beginTransaction();
+    public function revoke_selected(Request $request, AccessRoleAccessService $service, $role)
+    {
         try{
-            $roleres = Role::find($role);
-            foreach($request['access'] as $access){
-                $accessres = Access::where('id',$access)->value('name');
-                if(!$roleres->hasAccess($accessres)){
-                    $roleres->assignAccess($accessres);
-                }    
+            $data = $service->revoke_selected($request->selected, $role);
+            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                throw new Exception($data->getMessage(),$data->getCode());
+            }else{
+                return back()->with('success', config('app.message_success'));            
             }
-            DB::commit();
-            return back()->with('success', 'Berhasil Diaktivasi');            
         }catch(\Exception $err){
-            DB::rollback();
             return back()->with('error', $err->getMessage());            
         }
-    }
-
-    public function revokeall(Request $request, $role){
-        DB::beginTransaction();
-        try{
-            $roleres = Role::find($role);
-            foreach($request['access'] as $access){
-                $accessres = Access::where('id',$access)->value('name');
-                if($roleres->hasAccess($accessres)){
-                    $roleres->revokeAccess($accessres);
-                }
-            }
-            DB::commit();
-            return back()->with('success', 'Berhasil Diinaktivasi');            
-        }catch(\Exception $err){
-            DB::rollback();
-            return back()->with('error', $err->getMessage());            
-        }
-    }
+    }    
 }

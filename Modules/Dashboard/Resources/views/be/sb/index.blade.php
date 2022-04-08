@@ -1,5 +1,15 @@
 @extends(config('app.be_layout').'.main')
     @section('content')
+          @if(session('error'))
+              <div class="card shadow bg-danger text-white" style="margin-bottom:20px;">
+                  <div class="card-body" style="overflow-x:auto;padding:10px;">{!! session('error') !!}</div>
+              </div>
+          @endif
+          @if(session('success'))
+              <div class="card shadow bg-success text-white" style="margin-bottom:20px;">
+                  <div class="card-body" style="overflow-x:auto;padding:10px;">{!! session('success') !!}</div>
+              </div>
+          @endif
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <div class="row">

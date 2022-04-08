@@ -60,7 +60,7 @@ class AccessDatabaseSeeder extends Seeder
                             'id' => Uuid::uuid6(),
                             'name' => $value->getName(),
                             'guard_name' => $middle[0],
-                            'status' => 'Active'
+                            'status' => 'Active',
                         ]
                     );     
                     //CREATE ROLE ACCESS

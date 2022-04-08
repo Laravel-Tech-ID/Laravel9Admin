@@ -3,207 +3,198 @@
 namespace Modules\Access\Http\Controllers\Web\V1;
 
 use Illuminate\Http\Request;
-use DB;
-use Modules\Access\Entities\V1\Access;
-use Modules\Access\Entities\V1\Role;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Controller;
-use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Auth;
+use Modules\Access\Http\Requests\V1\AccessAccessRequest;
+use Modules\Access\Http\Services\V1\AccessAccessService;
+use Exception;
+use Validator;
 
 class AccessController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, AccessAccessService $service)
     {
-        DB::beginTransaction();
         try{
-            $search = $request['search'];
-            $routeCollection = Route::getRoutes();
-            foreach ($routeCollection as $value){
-                if($value->getName() !== null){
-                    $middle = $value->getAction('middleware');
-                    $check = Access::where('name',$value->getName())->where('guard_name',$middle[0])->first();
-                    if(!$check && ($middle[0] == 'web' || $middle[0] == 'api')){
-                        Access::create(
-                            [
-                                'id' => Uuid::uuid6(),
-                                'name' => $value->getName(),
-                                'guard_name' => $middle[0],
-                                'status' => 'Active'
-                            ]
-                        );                        
-                    }    
-                }
+            if(!isset($request->q_paging)){
+                $q_paging = 10;
+            }else{
+                $q_paging = $request->q_paging;
             }
-            //MASIH ADA PR MENGHAPUS ROUTE YG ADA DI DATABASE TAPI TIDAK ADA DI APLIKASI
-            //TERMASUK KAITANNYA DENGAN USER ROLE
-            $datas = Access::where('name','like','%'.$request['search'].'%')->orWhere('guard_name','like','%'.$request['search'].'%')->paginate(100);
-            DB::commit();
-            return view('access::'.config('app.be_view').'.access.access_index',compact('datas','search'));
+
+            $q_name = $request->q_name;
+            $q_guard_name = $request->q_guard_name;
+            $q_status = $request->q_status;
+            $q_desc = $request->q_desc;
+
+            $result = $service->index(
+                $q_paging,
+                $q_name,
+                $q_guard_name,
+                $q_status,
+                $q_desc,
+            );
+
+            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+                throw new Exception($result->getMessage(),$result->getCode());
+            }else{
+                $datas = $result['datas'];
+                $guards = $result['guards'];
+                return view('access::'.config('app.be_view').'.access.access_index',compact(
+                    'datas',
+                    'guards',
+                    'q_paging',
+                    'q_name',
+                    'q_guard_name',
+                    'q_status',
+                    'q_desc',
+                ));    
+            }
         }catch(\Exception $err){
-            DB::rollback();
             return back()->with('error', $err->getMessage());
         }
     }
 
     public function create()
     {
-        DB::beginTransaction();
         try{
-            DB::commit();
             return view('access::'.config('app.be_view').'.access.access_create');
         }catch(\Exception $err){
-            DB::rollback();
             return back()->with('error', $err->getMessage());
         }
     }
 
-    public function store(Request $request)
+    public function store(Request $request, AccessAccessService $service)
     {
-        $request->validate(
-            [
-                'name' => 'required|string|unique:accesses,name,NULL,id,guard_name,'.$request->guard_name,
-                'guard_name' => 'required|string',
-                'status' => 'required|string',
-                'desc' => 'nullable|string',
-                'created_by' => Auth::user()->id
-            ]
-        );
-        DB::beginTransaction();
         try{
-            Access::create(
-                [
-                    'id' => Uuid::uuid6(),
-                    'name' => $request['name'],
-                    'guard_name' => $request['guard_name'],
-                    'status' => $request['status'],
-                    'desc' => $request['desc']
-                ]
-            );
-            DB::commit();
-            return redirect(route('admin.v1.access.access.index'))->with('success',config('app.message_store'));
-        }catch(\Exception $err){
-            DB::rollback();
-            return back()->withInput()->with('status', $err->getMessage());
-        }
-    }
-
-    public function edit($id)
-    {
-        DB::beginTransaction();
-        try{
-            $data = Access::find($id);
-            DB::commit();
-            return view('access::'.config('app.be_view').'.access.access_edit',compact('data'));
-        }catch(\Exception $err){
-            DB::rollback();
-            return back()->with('error',$err->getMessage());
-        }
-    }
-
-    public function update(Request $request)
-    {
-        $request->validate(
-            [
-                'name' => 'required|string|unique:accesses,name,'.$request->id.',id,guard_name,'.$request->guard_name,
-                'guard_name' => 'required|string',
-                'status' => 'required|string',
-                'desc' => 'nullable|string'
-            ]
-        );
-        DB::beginTransaction();
-        try{
-            Access::find($request['id'])->update(
-                [
-                    'name' => $request['name'],
-                    'guard_name' => $request['guard_name'],
-                    'status' => $request['status'],
-                    'desc' => $request['desc']
-                ]
-            );
-            DB::commit();
-            return redirect(route('admin.v1.access.access.index'))->with('success',config('app.message_update'));
-        }catch(\Exception $err){
-            DB::rollback();
-            return back()->withInput()->with('status', $err->getMessage());
-        }
-    }
-
-    public function status($id){
-        DB::beginTransaction();
-        try{
-            $access = Access::find($id);
-            
-            $access->update([
-              'status' => ($access->status == 'Active') ? 'Inactive' : 'Active',
-            ]);
-            DB::commit();
-            return back()->with('success', 'Status Berhasil Diubah');            
-        }catch(\Exception $err){
-            DB::rollback();
-            return back()->with('error',$err->getMessage());
-        }    
-      }
-    
-      public function activateall(Request $request){
-        DB::beginTransaction();
-        try{
-            foreach($request['access'] as $access){
-                $access = Access::find($access);
-                $access->update([
-                'status' => 'Active',
-                ]);
+            $rules = (new AccessAccessRequest)->rules();
+            $request->merge(['created_by' => Auth::user()->id]);
+            $validator = Validator::make($request->all(),$rules);
+            if ($validator->fails()){
+                return back()->withInput()->withErrors($validator);
+            }else{
+                try{
+                    $data = $service->store($request->all());
+                    if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                        throw new Exception($data->getMessage(),$data->getCode());
+                    }else{
+                        return redirect(route('admin.v1.access.access.index'))->with('success',config('app.message_store'));
+                    }
+                }catch(\Exception $err){
+                    return back()->withInput()->with('error',$err->getMessage());
+                }
             }
-            DB::commit();
-            return back()->with('success', 'Akses Berhasil Diaktivasi');            
         }catch(\Exception $err){
-            DB::rollback();
-            return back()->with('error', $err->getMessage());            
+            return back()->withInput()->with('error',$err->getMessage());
+        }           
+    }
+
+
+    public function edit(AccessAccessService $service, $id)
+    {
+        try{
+            $data = $service->edit($id);
+            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                throw new Exception($data->getMessage(),$data->getCode());
+            }else{
+                return view('access::'.config('app.be_view').'.access.access_edit',compact('data'));
+            }
+        }catch(\Exception $err){
+            return back()->withInput()->with('error',$err->getMessage());
+        }
+    }
+
+    public function update(Request $request, AccessAccessService $service, $id)
+    {
+        try{
+            $rules = (new AccessAccessRequest)->rules($id);
+            $request->merge(['updated_by' => Auth::user()->id]);
+            $validator = Validator::make($request->all(),$rules);
+            if($validator->fails()){
+                return back()->withInput()->withErrors($validator);
+            }else{
+                try{
+                    $data = $service->update($request->all(),$id);
+                    if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                        throw new Exception($data->getMessage(),$data->getCode());
+                    }else{
+                        return redirect(route('admin.v1.access.access.index'))->with('success',config('app.message_update'));
+                    }
+                }catch(\Exception $err){
+                    return back()->withInput()->with('error',$err->getMessage());
+                }
+            }  
+        }catch(\Exception $err){
+            return back()->withInput()->with('error',$err->getMessage());
+        }           
+    }
+
+    public function status(AccessAccessService $service, $id)
+    {
+        try{
+            $data = $service->status($id);
+            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                throw new Exception($data->getMessage(),$data->getCode());
+            }else{
+                return back()->with('success',config('app.message_success'));
+            }
+        }catch(\Exception $err){
+            return back()->with('error',$err->getMessage());
         }
     }
     
-    public function inactivateall(Request $request){
-        DB::beginTransaction();
+    public function activate_selected(Request $request, AccessAccessService $service)
+    {
         try{
-            foreach($request['access'] as $access){
-                $access = Access::find($access);
-                $access->update([
+            foreach($request->selected as $id){
+                $datas = [
+                    'status' => 'Active',
+                ];
+                $service->update($datas,$id);
+            }
+            return back()->with('success',config('app.message_success'));
+        }catch(\Exception $err){
+            return back()->with('error',$err->getMessage());
+        }
+    }
+    
+    public function inactivate_selected(Request $request, AccessAccessService $service)
+    {
+        try{
+            foreach($request->selected as $id){
+                $datas = [
                     'status' => 'Inactive',
-                ]);
-            }
-            DB::commit();
-            return back()->with('success', 'Akses Berhasil Diinaktivasi');            
+                ];
+                $service->update($datas,$id);
+            }    
+            return back()->with('success',config('app.message_success'));
         }catch(\Exception $err){
-            DB::rollback();
-            return back()->with('error', $err->getMessage());            
+            return back()->with('error',$err->getMessage());
         }
     }
 
-    public function destroy($id)
+    public function destroy(AccessAccessService $service, $id)
     {
-        DB::beginTransaction();
         try{
-            $access = Access::find($id)->delete();
-            DB::commit();
-            return back()->with('success', 'Akses Berhasil Dihapus');            
-        }catch(\Exception $err){
-            DB::rollback();
-            return back()->withInput()->with('status', $err->getMessage());
-        }
-    }
-
-    public function deleteall(Request $request){
-        DB::beginTransaction();
-        try{
-            foreach($request['access'] as $access){
-                $access = Access::find($access)->delete();
+            $data = $service->destroy($id);
+            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                throw new Exception($data->getMessage(),$data->getCode());
+            }else{
+                return back()->with('success',config('app.message_destroy'));
             }
-            DB::commit();
-            return back()->with('success', 'Akses Berhasil Dihapus');            
         }catch(\Exception $err){
-            DB::rollback();
-            return back()->with('error', $err->getMessage());            
+            return back()->with('error',$err->getMessage());
         }
     }
 
+    public function destroy_selected(Request $request, AccessAccessService $service)
+    {
+        try{
+            foreach($request->selected as $id){
+                $service->destroy($id);
+            }
+            return back()->with('success',config('app.message_destroy'));
+        }catch(\Exception $err){
+            return back()->with('error',$err->getMessage());
+        }
+    }
 }

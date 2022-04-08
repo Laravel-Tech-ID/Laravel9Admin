@@ -330,7 +330,7 @@ class Response{
 
         return response()->json($arrs,$code);
     }
-
+   
     static function _100($message = null,$error_code = null,$data = null,$code = 100){
         return response()->json(self::response(message: $message,error_code: $error_code,data: $data,code: $code),$code);
     }

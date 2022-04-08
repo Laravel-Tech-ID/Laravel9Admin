@@ -42,8 +42,8 @@
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>User</span></a>
                   @endaccess
-                  @access('admin.v1.setting.index')
-                    <a class="collapse-item" href="{{ route('admin.v1.setting.index') }}">
+                  @access('admin.v1.setting.edit')
+                    <a class="collapse-item" href="{{ route('admin.v1.setting.edit') }}">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Setting</span></a>
                   @endaccess

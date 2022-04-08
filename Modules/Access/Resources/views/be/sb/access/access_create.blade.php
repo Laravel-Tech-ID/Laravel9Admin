@@ -31,7 +31,7 @@
                             <div class="form-group row">
                                 <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Name') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
-                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('sarch') }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                     @error('name')
                                         <span class="invalid-feedback" permission="alert">
                                             <strong>{{ $message }}</strong>
@@ -43,8 +43,8 @@
                                 <label for="guard_name" class="col-md-3 col-form-label text-md-right">{{ __('Guard Name') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
                                     <select name="guard_name" id="guard_name" class="form-control form-control-user @error('guard_name') is-invalid @enderror" value="{{ old('guard_name') }}" required autocomplete="guard_name">
-                                        <option value="web">Web</option>
-                                        <option value="api">Api</option>
+                                        <option value="web" {{ (old('guard_name') == 'web') ? 'selected' : '' }}>Web</option>
+                                        <option value="api" {{ (old('guard_name') == 'api') ? 'selected' : '' }}>Api</option>
                                     </select>
                                     @error('guard_name')
                                         <span class="invalid-feedback" status="alert">
@@ -57,8 +57,8 @@
                                 <label for="status" class="col-md-3 col-form-label text-md-right">{{ __('Status') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
                                     <select name="status" id="status" class="form-control form-control-user @error('status') is-invalid @enderror" value="{{ old('status') }}" required autocomplete="status">
-                                        <option value="Active">Active</option>
-                                        <option value="Inactive">Inactive</option>
+                                        <option value="Active" {{ (old('status') == 'Active') ? 'selected' : '' }}>Active</option>
+                                        <option value="Inactive" {{ (old('status') == 'Inactive') ? 'selected' : '' }}>Inactive</option>
                                     </select>
                                     @error('status')
                                         <span class="invalid-feedback" status="alert">

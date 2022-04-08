@@ -56,9 +56,9 @@ return [
     'message_destroy' => 'Data Deleted Successfully',
     'message_success' => 'Data Proceed Successfully',
     'message_error' => 'Data Proceed Successfully',
+    'message_deny' => 'Access Deny',
     //DEFAULT MESSAGE
     
-    /*
     /*
     |--------------------------------------------------------------------------
     | Application Name

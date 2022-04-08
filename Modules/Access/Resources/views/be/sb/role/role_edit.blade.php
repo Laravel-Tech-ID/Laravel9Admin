@@ -30,7 +30,6 @@
                             @csrf  
                             @method('PUT')
                             <div class="form-group row">
-                                <input type="hidden" name="id" value="{{ $data->id }}" />
                                 <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Name') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0">
                                     <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ $data->name }}" required autocomplete="name" autofocus>

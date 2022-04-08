@@ -14,24 +14,6 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Access Management</h1>
             <div class="d-none d-sm-inline-block">
-              <form method="GET">
-                @csrf
-                <div class="form-group row">
-                    <div class="col-md-8 mb-3 mb-sm-0">
-                      <input id="search" type="text" class="form-control form-control-user @error('search') is-invalid @enderror" name="search" value="{{ (old('search')) ? old('search') : $search }}" autocomplete="description">
-                      @error('search')
-                          <span class="invalid-feedback" search="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
-                    </div>                                                                                
-                    <div class="col-md-4 mb-3 mb-sm-0">
-                      <button type="submit" name="assignbutton" formaction="{{ route('admin.v1.access.access.index') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i>
-                        {{ __('Search') }}                              
-                      </button>
-                    </div>
-                </div>
-              </form>
             </div>
           </div>
           <!-- Content Row -->
@@ -42,27 +24,69 @@
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                       <h6 class="m-0 font-weight-bold text-primary">Access List</h6>
+                      <div class="btn-group btn-sm nospiner" >
+                        <a  href="{{ route('admin.v1.access.access.create') }}"  class="btn btn-success btn-sm" >
+                          <i class="fas fa-fw fa-plus"></i> Add Data
+                        </a>
+                        <button type="submit" form="selection" formmethod="post" formaction="{{ route('admin.v1.access.access.activate.selected') }}" class="btn btn-primary btn-sm">
+                          <i class="fas fa-fw fa-check"></i> Activate Selected
+                        </button>
+                        <button type="submit" form="selection" formmethod="post" formaction="{{ route('admin.v1.access.access.inactivate.selected') }}" class="btn btn-warning btn-sm">
+                          <i class="fas fa-fw fa-times"></i> Inactivate Selected
+                        </button>
+                        <button type="submit" form="selection" formmethod="post" formaction="{{ route('admin.v1.access.access.delete.selected') }}" onclick="return confirm('Confirm Delete')" class="btn btn-danger btn-sm">
+                          <i class="fas fa-fw fa-times"></i> Delete Selected
+                        </button>
+                      </div>                                      
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="overflow-x:auto;padding:20px;">
-
-                      <div class="form-group row">
-                        <div class="col-md-6 mb-3 mb-sm-0">
-                        </div>
-                        <div class="col-md-6 mb-3 mb-sm-0">
-                          <a style="float:left;margin-right:10px;margin-left:70px" href="{{ route('admin.v1.access.access.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Add Access</a>    
-                          <form method="POST" >
-                          @csrf
-                          @method('POST')
-                          <button style="float:left;margin-right:10px;" type="submit" name="assignbutton" formaction="{{ route('admin.v1.access.access.activateall') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Activate</button>
-                          <button style="float:left;margin-right:10px;" type="submit" name="assignbutton" formaction="{{ route('admin.v1.access.access.inactivateall') }}" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm"><i class="fas fa-edit fa-sm text-white-50"></i> Inactivate</button>            
-                          <button style="float:left;" type="submit" name="assignbutton" formaction="{{ route('admin.v1.access.access.deleteall') }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="return confirm('Confirm Delete')"><i class="fas fa-edit fa-sm text-white-50"></i> Delete</button>            
-                        </div>
-                      </div>
-
-
                         <table class="table table-bordered table-hover">
                             <thead>
+                              <form id="searchform">
+                                @csrf
+                                <tr>
+                                    <th width="2%"></th>
+                                    <th width="7%">
+                                      <select name="q_paging" id="q_paging"  class="form-control form-control-user @error('q_paging') is-invalid @enderror" value="{{ old('q_paging') }}" autocomplete="q_paging">
+                                          <option value="10" {{ ((!isset($q_paging)) ? 'selected' : ($q_paging == 10)) ? 'selected' : ''}}>10</option>
+                                          <option value="20" {{ ((!isset($q_paging)) ? '' : ($q_paging == 20)) ? 'selected' : ''}}>20</option>
+                                          <option value="50" {{ ((!isset($q_paging)) ? '' : ($q_paging == 50)) ? 'selected' : ''}}>50</option>
+                                          <option value="100" {{ ((!isset($q_paging)) ? '' : ($q_paging == 100)) ? 'selected' : ''}}>100</option>
+                                      </select>
+                                    </th>
+                                    <th width="40%">
+                                      <input id="q_name" type="text" class="form-control form-control-user @error('q_name') is-invalid @enderror" name="q_name" value="{{ (isset($q_name)) ? $q_name : '' }}" autocomplete="q_name">
+                                    </th>
+                                    <th width="15%">
+                                      <select name="q_guard_name" id="q_guard_name"  class="form-control form-control-user @error('q_guard_name') is-invalid @enderror" value="{{ old('q_guard_name') }}" autocomplete="q_guard_name">
+                                          <option disabled="disabled" selected="selected">Select an option</option>                                        
+                                          @foreach($guards as $guard)
+                                              <option value="{{$guard->guard_name}}" {{ ((!isset($q_guard_name)) ? '' : ($q_guard_name == $guard->guard_name)) ? 'selected' : ''}}>{{$guard->guard_name}}</option>
+                                          @endforeach
+                                      </select>
+                                    </th>
+                                    <th width="15%">
+                                      <select name="q_status" id="q_status"  class="form-control form-control-user @error('q_status') is-invalid @enderror" value="{{ old('q_status') }}" autocomplete="q_status">
+                                          <option disabled="disabled" selected="selected">Select</option>                                        
+                                          <option value="Active" {{ ((!isset($q_status)) ? '' : ($q_status == 'Active')) ? 'selected' : ''}}>Active</option>
+                                          <option value="Inactive" {{ ((!isset($q_status)) ? '' : ($q_status == 'Inactive')) ? 'selected' : ''}}>Inactive</option>
+                                      </select>
+                                    </th>
+                                    <th width="20%">
+                                      <input id="q_desc" type="text" class="form-control form-control-user @error('q_desc') is-invalid @enderror" name="q_desc" value="{{ (isset($q_desc)) ? $q_desc : '' }}" autocomplete="q_desc">
+                                    </th>
+                                    <th width="5%" class="text-center align-middle">
+                                      <div class="btn-group nospiner" >
+                                        <button type="submit" form="searchform" formmethod="get" formaction="{{ route('admin.v1.access.access.index') }}" class="btn btn-sm btn-success">
+                                          <i class="fas fa-fw fa-search"></i>
+                                        </button>
+                                        <a  href="{{ route('admin.v1.access.access.index') }}"  class="btn btn-sm btn-danger">
+                                          <i class="fas fa-fw fa-times"></i>                                            
+                                        </a>
+                                      </div>                                      
+                                    </th>
+                                </tr>
                                 <tr>
                                     <th width="5%"><input type="checkbox" id="checkall"/></th>
                                     <th width="5%">No</th>
@@ -72,11 +96,14 @@
                                     <th width="20%">Description</th>
                                     <th width="5%">Action</th>
                                 </tr>
+                              </form>
                             </thead>
                             <tbody>
+                              <form id="selection">
+                              @csrf
                                 @foreach ($datas as $data)
                                     <tr>
-                                        <td><input name="access[]" value="{{ $data->id }}" type="checkbox" /></td>
+                                        <td><input name="selected[]" value="{{ $data->id }}" type="checkbox" /></td>
                                         <td>{{($datas->currentPage() - 1) * $datas->perPage() + $loop->iteration}}</td>
                                         <td>{{ $data->name }}</td>
                                         <td>{{ $data->guard_name }}</td>
@@ -98,8 +125,8 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                                </form>
-                              </tbody>
+                              </form>
+                            </tbody>
                         </table>
                         <div class="d-none d-sm-inline-block" style="float:right;">
                             {!! $datas->appends(request()->input())->links('vendor.pagination.bootstrap-4') !!}
