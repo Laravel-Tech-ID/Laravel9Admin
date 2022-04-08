@@ -151,7 +151,7 @@ class UserController extends Controller
             $request->merge(
                 [
                     'blocked' => ($request->has('blocked')) ? 1 : 0,
-                    'created_by' => Auth::user()->id
+                    'updated_by' => Auth::user()->id
                 ],
             );
             $validator = Validator::make($request->all(),$rules);
