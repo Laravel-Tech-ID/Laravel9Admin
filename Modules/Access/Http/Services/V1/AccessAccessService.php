@@ -123,16 +123,11 @@ class AccessAccessService
     {
         DB::beginTransaction();
         try{
-
-            $arrs = [];
-            foreach($data as $key => $val){
-                $arrs = array_merge($arrs,[$key => $val]);
-            }
             $result = Access::find($id);
             if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
-                $result = $result->update($arrs);
+                $result = $result->update($data);
                 if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
                     throw new Exception($result->getMessage(),$result->getCode());
                 }else{
