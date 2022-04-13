@@ -120,14 +120,6 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="role" class="col-md-3 col-form-label text-md-right"></label>
-                                <div class="col-md-8 mb-3 mb-sm-0 text-danger">
-                                    @error('role')
-                                        <strong>{{ $message }}</strong>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="form-group row" style="margin-bottom: 60px;">
                                 <label for="picture" class="col-md-3 col-form-label text-md-right">{{ __('Foto') }}</label>
                                 <div class="col-md-8 mb-3 mb-sm-0" style="text-align:center;padding:10px;">
@@ -183,7 +175,7 @@
         </div>
         <script>
         $(document).ready(function(){
-            if($('#blocked').val()){
+            if($('#blocked').val() == 1){
                 $('#div_blocked_reason').show();
             }else{
                 $('#div_blocked_reason').hide();

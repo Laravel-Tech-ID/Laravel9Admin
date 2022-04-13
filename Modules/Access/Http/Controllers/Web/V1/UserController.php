@@ -55,7 +55,6 @@ class UserController extends Controller
                     'q_status'
                 ));
             }
-
         }catch(\Exception $err){
             return back()->with('error',$err->getMessage());
         }
@@ -118,7 +117,7 @@ class UserController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit(ProfileService $service, $id)
+    public function edit(AccessUserService $service, $id)
     {
         try{
             $datas = $service->edit($id);
