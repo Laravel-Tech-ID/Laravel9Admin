@@ -89,11 +89,9 @@ class AccessAccessService
                 'id' => $uuid
             ];
 
-            foreach($data as $key => $val){
-                $arrs = array_merge($arrs,[$key => $val]);
-            }
+            $data = array_merge($data,$arrs);
 
-            $result = Access::create($arrs);
+            $result = Access::create($data);
             if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{

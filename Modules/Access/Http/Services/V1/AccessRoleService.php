@@ -57,10 +57,9 @@ class AccessRoleService
                 'id' => $uuid
             ];
 
-            foreach($data as $key => $val){
-                $arrs = array_merge($arrs,[$key => $val]);
-            }
-            $result = Role::create($arrs);
+            $data = array_merge($data,$arrs);
+
+            $result = Role::create($data);
             if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
