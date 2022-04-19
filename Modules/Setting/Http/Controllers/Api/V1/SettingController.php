@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use App\Helpers\JsonResponse;
 use Ramsey\Uuid\Uuid;
 use Modules\Setting\Transformers\V1\SettingResource;
+use App\Functions;
+use Exception;
 
 class SettingController extends Controller
 {

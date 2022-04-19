@@ -7,8 +7,9 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Access\Http\Requests\V1\AccessUserRequest;
 use Modules\Access\Http\Services\V1\AccessUserService;
-use Exception;
 use Validator;
+use App\Functions;
+use Exception;
 
 class UserController extends Controller
 {
@@ -38,7 +39,7 @@ class UserController extends Controller
                 $q_status
             );
 
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
                 $datas = $result['datas'];
@@ -67,7 +68,7 @@ class UserController extends Controller
     {
         try{
             $roles = $service->create();
-            if(is_object($roles) && (get_class($roles) == 'Exception' || get_class($roles) == 'Illuminate\Database\QueryException' || get_class($roles) == 'ErrorException')){
+            if(Functions::exception($roles)){
                 throw new Exception($roles->getMessage(),$roles->getCode());
             }else{
                 return view('access::'.config('app.be_view').'.user.user_create',compact('roles'));
@@ -98,7 +99,7 @@ class UserController extends Controller
             }else{
                 try{
                     $data = $service->store($request->all());
-                    if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                    if(Functions::exception($data)){
                         throw new Exception($data->getMessage(),$data->getCode());
                     }else{
                         return redirect(route('admin.v1.access.user.index'))->with('success',config('app.message_store'));
@@ -123,7 +124,7 @@ class UserController extends Controller
             $datas = $service->edit($id);
             $data = $datas['data'];
             $roles = $datas['roles'];
-            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+            if(Functions::exception($data)){
                 throw new Exception($data->getMessage(),$data->getCode());
             }else{
                 return view('access::'.config('app.be_view').'.user.user_edit', compact(
@@ -159,7 +160,7 @@ class UserController extends Controller
             }else{
                 try{
                     $data = $service->update($request->all(), $id);
-                    if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                    if(Functions::exception($data)){
                         throw new Exception($data->getMessage(),$data->getCode());
                     }else{
                         return redirect(route('admin.v1.access.user.index'))->with('success',config('app.message_update'));
@@ -182,7 +183,7 @@ class UserController extends Controller
     {
         try{
             $data = $service->destroy($id);
-            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+            if(Functions::exception($data)){
                 throw new Exception($data->getMessage(),$data->getCode());
             }else{
                 return back()->with('success',config('app.message_destroy'));

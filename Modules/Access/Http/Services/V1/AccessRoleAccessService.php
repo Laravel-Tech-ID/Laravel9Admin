@@ -67,7 +67,7 @@ class AccessRoleAccessService
                 $result = $roleres->assignAccess($accessres);
             }
 
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
                 DB::commit();

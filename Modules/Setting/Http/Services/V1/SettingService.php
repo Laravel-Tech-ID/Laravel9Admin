@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Storage;
+use App\Functions;
+use Exception;
 
 class SettingService
 {
@@ -46,7 +48,7 @@ class SettingService
             }
    
             $result = Setting::first();
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
 
@@ -72,7 +74,7 @@ class SettingService
                 }
 
                 $result1 = $result->update($new_array);
-                if(is_object($result1) && (get_class($result1) == 'Exception' || get_class($result1) == 'Illuminate\Database\QueryException')){
+                if(Functions::exception($result1)){
                     throw new Exception($result1->getMessage(),$result1->getCode());
                 }else{
                     DB::commit();

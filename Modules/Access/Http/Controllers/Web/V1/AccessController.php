@@ -7,8 +7,9 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Access\Http\Requests\V1\AccessAccessRequest;
 use Modules\Access\Http\Services\V1\AccessAccessService;
-use Exception;
 use Validator;
+use App\Functions;
+use Exception;
 
 class AccessController extends Controller
 {
@@ -34,7 +35,7 @@ class AccessController extends Controller
                 $q_desc,
             );
 
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
                 $datas = $result['datas'];
@@ -74,7 +75,7 @@ class AccessController extends Controller
             }else{
                 try{
                     $data = $service->store($request->all());
-                    if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                    if(Functions::exception($data)){
                         throw new Exception($data->getMessage(),$data->getCode());
                     }else{
                         return redirect(route('admin.v1.access.access.index'))->with('success',config('app.message_store'));
@@ -93,7 +94,7 @@ class AccessController extends Controller
     {
         try{
             $data = $service->edit($id);
-            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+            if(Functions::exception($data)){
                 throw new Exception($data->getMessage(),$data->getCode());
             }else{
                 return view('access::'.config('app.be_view').'.access.access_edit',compact('data'));
@@ -114,7 +115,7 @@ class AccessController extends Controller
             }else{
                 try{
                     $data = $service->update($request->all(),$id);
-                    if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                    if(Functions::exception($data)){
                         throw new Exception($data->getMessage(),$data->getCode());
                     }else{
                         return redirect(route('admin.v1.access.access.index'))->with('success',config('app.message_update'));
@@ -132,7 +133,7 @@ class AccessController extends Controller
     {
         try{
             $data = $service->status($id);
-            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+            if(Functions::exception($data)){
                 throw new Exception($data->getMessage(),$data->getCode());
             }else{
                 return back()->with('success',config('app.message_success'));
@@ -176,7 +177,7 @@ class AccessController extends Controller
     {
         try{
             $data = $service->destroy($id);
-            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+            if(Functions::exception($data)){
                 throw new Exception($data->getMessage(),$data->getCode());
             }else{
                 return back()->with('success',config('app.message_destroy'));

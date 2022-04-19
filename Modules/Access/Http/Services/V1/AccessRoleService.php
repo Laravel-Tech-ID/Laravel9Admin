@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 use Carbon\Carbon;
-
+use App\Functions;
+use Exception;
 
 class AccessRoleService
 {
@@ -60,7 +61,7 @@ class AccessRoleService
             $data = array_merge($data,$arrs);
 
             $result = Role::create($data);
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
                 DB::commit();
@@ -90,11 +91,11 @@ class AccessRoleService
         DB::beginTransaction();
         try{
             $result = Role::find($id);
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
                 $result = $result->update($data);
-                if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+                if(Functions::exception($result)){
                     throw new Exception($result->getMessage(),$result->getCode());
                 }else{
                     DB::commit();
@@ -129,11 +130,11 @@ class AccessRoleService
         DB::beginTransaction();
         try{
             $result = Role::find($id);
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
                 $result = $result->delete();
-                if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+                if(Functions::exception($result)){
                     throw new Exception($result->getMessage(),$result->getCode());
                 }else{
                     DB::commit();

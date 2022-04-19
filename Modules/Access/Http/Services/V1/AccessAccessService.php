@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 use Carbon\Carbon;
-
+use App\Functions;
+use Exception;
 
 class AccessAccessService
 {
@@ -92,7 +93,7 @@ class AccessAccessService
             $data = array_merge($data,$arrs);
 
             $result = Access::create($data);
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
                 DB::commit();
@@ -122,11 +123,11 @@ class AccessAccessService
         DB::beginTransaction();
         try{
             $result = Access::find($id);
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
                 $result = $result->update($data);
-                if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+                if(Functions::exception($result)){
                     throw new Exception($result->getMessage(),$result->getCode());
                 }else{
                     DB::commit();
@@ -161,11 +162,11 @@ class AccessAccessService
         DB::beginTransaction();
         try{
             $result = Access::find($id);
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
                 $result = $result->delete();
-                if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+                if(Functions::exception($result)){
                     throw new Exception($result->getMessage(),$result->getCode());
                 }else{
                     DB::commit();

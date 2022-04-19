@@ -10,6 +10,8 @@ use Ramsey\Uuid\Uuid;
 use Carbon\Carbon;
 use Storage;
 use Illuminate\Support\Facades\Hash;
+use App\Functions;
+use Exception;
 
 class AccessUserService
 {
@@ -67,7 +69,7 @@ class AccessUserService
         DB::beginTransaction();
         try{
             $result = Role::all();
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
                 DB::commit();
@@ -115,7 +117,7 @@ class AccessUserService
     
             $result = User::create($new_array);
             $result_assign = $result->assignRole($role);
-            if((is_object($result)) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
                 DB::commit();
@@ -167,7 +169,7 @@ class AccessUserService
             }
    
             $result = User::find($id);
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
 
@@ -183,7 +185,7 @@ class AccessUserService
     
                 $result1 = $result->update($new_array);
                 $result_assign = $result->refreshRole($role);
-                if(is_object($result1) && (get_class($result1) == 'Exception' || get_class($result1) == 'Illuminate\Database\QueryException')){
+                if(Functions::exception($result1)){
                     throw new Exception($result1->getMessage(),$result1->getCode());
                 }else{
                     DB::commit();
@@ -217,11 +219,11 @@ class AccessUserService
         DB::beginTransaction();
         try{
             $result = User::find($id);
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
                 $result1 = $result->delete();
-                if(is_object($result1) && (get_class($result1) == 'Exception' || get_class($result1) == 'Illuminate\Database\QueryException')){
+                if(Functions::exception($result1)){
                     throw new Exception($result1->getMessage(),$result1->getCode());
                 }else{
                     Storage::delete(config('access.private').'user/'.$result->picture);

@@ -7,8 +7,9 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Profile\Http\Requests\V1\ProfileRequest;
 use Modules\Profile\Http\Services\V1\ProfileService;
-use Exception;
 use Validator;
+use App\Functions;
+use Exception;
 
 class ProfileController extends Controller
 {
@@ -24,7 +25,7 @@ class ProfileController extends Controller
         try{
             $datas = $service->edit(Auth::user()->id);
             $data = $datas['data'];
-            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+            if(Functions::exception($data)){
                 throw new Exception($data->getMessage(),$data->getCode());
             }else{
                 return view('profile::'.config('app.be_view').'.profile.profile_edit', compact('data'));
@@ -49,7 +50,7 @@ class ProfileController extends Controller
             }else{
                 try{
                     $data = $service->update($request->all(), Auth::user()->id);
-                    if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                    if(Functions::exception($data)){
                         throw new Exception($data->getMessage(),$data->getCode());
                     }else{
                         return back()->with('success',config('app.message_update'));

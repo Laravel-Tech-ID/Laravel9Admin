@@ -7,8 +7,9 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Setting\Http\Requests\V1\SettingRequest;
 use Modules\Setting\Http\Services\V1\SettingService;
-use Exception;
 use Validator;
+use App\Functions;
+use Exception;
 
 class SettingController extends Controller
 {
@@ -17,7 +18,7 @@ class SettingController extends Controller
         try{
             $datas = $service->edit();
             $data = $datas['data'];
-            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+            if(Functions::exception($data)){
                 throw new Exception($data->getMessage(),$data->getCode());
             }else{
                 return view('setting::'.config('app.be_view').'.setting_edit', compact('data'));
@@ -42,7 +43,7 @@ class SettingController extends Controller
             }else{
                 try{
                     $data = $service->update($request->all());
-                    if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                    if(Functions::exception($data)){
                         throw new Exception($data->getMessage(),$data->getCode());
                     }else{
                         return back()->with('success',config('app.message_update'));

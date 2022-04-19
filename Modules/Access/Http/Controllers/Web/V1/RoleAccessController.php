@@ -7,8 +7,9 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Access\Http\Requests\V1\AccessRoleAccessRequest;
 use Modules\Access\Http\Services\V1\AccessRoleAccessService;
-use Exception;
 use Validator;
+use App\Functions;
+use Exception;
 
 class RoleAccessController extends Controller
 {
@@ -33,7 +34,7 @@ class RoleAccessController extends Controller
                 $q_status
             );
 
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException')){
+            if(Functions::exception($result)){
                 throw new Exception($result->getMessage(),$result->getCode());
             }else{
                 $datas = $result['datas'];
@@ -59,7 +60,7 @@ class RoleAccessController extends Controller
     {
         try{
             $data = $service->assign($role, $access);
-            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+            if(Functions::exception($data)){
                 throw new Exception($data->getMessage(),$data->getCode());
             }else{
                 return back()->with('success', config('app.message_success'));            
@@ -73,7 +74,7 @@ class RoleAccessController extends Controller
     {
         try{
             $data = $service->assign_selected($request->selected, $role);
-            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+            if(Functions::exception($data)){
                 throw new Exception($data->getMessage(),$data->getCode());
             }else{
                 return back()->with('success', config('app.message_success'));            
@@ -87,7 +88,7 @@ class RoleAccessController extends Controller
     {
         try{
             $data = $service->revoke_selected($request->selected, $role);
-            if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+            if(Functions::exception($data)){
                 throw new Exception($data->getMessage(),$data->getCode());
             }else{
                 return back()->with('success', config('app.message_success'));            

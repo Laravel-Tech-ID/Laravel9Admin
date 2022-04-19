@@ -6,8 +6,9 @@ use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Response;
 use Modules\Access\Entities\V1\User;
-use Exception;
 use DB;
+use App\Functions;
+use Exception;
 
 class AuthController extends Controller
 {
@@ -44,7 +45,7 @@ class AuthController extends Controller
                 DB::commit();
                 return Response::true(data: $data);
             }else{
-                if(is_object($data) && (get_class($data) == 'Exception' || get_class($data) == 'Illuminate\Database\QueryException' || get_class($data) == 'ErrorException')){
+                if(Functions::exception($data)){
                     throw new Exception($data->getMessage(),$data->getCode());
                 }else{
                     throw new Exception("",404);
@@ -71,7 +72,7 @@ class AuthController extends Controller
     {
         try{
             $result = auth('api')->logout();
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException' || get_class($result) == 'ErrorException')){
+            if(Functions::exception($result)){
                 throw new Exception($data->getMessage(),$data->getCode());
             }else{
                 return Response::true();
@@ -96,7 +97,7 @@ class AuthController extends Controller
     {
         try{
             $result = $this->respondWithToken(auth('api')->refresh());
-            if(is_object($result) && (get_class($result) == 'Exception' || get_class($result) == 'Illuminate\Database\QueryException' || get_class($result) == 'ErrorException')){
+            if(Functions::exception($result)){
                 throw new Exception($data->getMessage(),$data->getCode());
             }else{
                 return Response::true(data: $result->original);
