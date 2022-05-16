@@ -16,7 +16,7 @@
             <span>Dashboard</span></a>
         </li>
                
-        @access('admin.v1.setting.index','admin.access.user.index')
+        @access('admin.v1.access.user.index')
         <li class="nav-item">
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#system"
               aria-expanded="true" aria-controls="system">
