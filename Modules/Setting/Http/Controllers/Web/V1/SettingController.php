@@ -19,7 +19,7 @@ class SettingController extends Controller
             $datas = $service->edit();
             $data = $datas['data'];
             if(Functions::exception($data)){
-                throw new Exception($data->getMessage(),$data->getCode());
+                throw new Exception($data->getMessage(),is_string($data->getCode()) ? (int)$data->getCode() : $data->getCode());
             }else{
                 return view('setting::'.config('app.be_view').'.setting_edit', compact('data'));
             }
@@ -44,7 +44,7 @@ class SettingController extends Controller
                 try{
                     $data = $service->update($request->all());
                     if(Functions::exception($data)){
-                        throw new Exception($data->getMessage(),$data->getCode());
+                        throw new Exception($data->getMessage(),is_string($data->getCode()) ? (int)$data->getCode() : $data->getCode());
                     }else{
                         return back()->with('success',config('app.message_update'));
                     }

@@ -26,7 +26,7 @@ class ProfileController extends Controller
             $datas = $service->edit(Auth::user()->id);
             $data = $datas['data'];
             if(Functions::exception($data)){
-                throw new Exception($data->getMessage(),$data->getCode());
+                throw new Exception($data->getMessage(),is_string($data->getCode()) ? (int)$data->getCode() : $data->getCode());
             }else{
                 return view('profile::'.config('app.be_view').'.profile.profile_edit', compact('data'));
             }
@@ -51,7 +51,7 @@ class ProfileController extends Controller
                 try{
                     $data = $service->update($request->all(), Auth::user()->id);
                     if(Functions::exception($data)){
-                        throw new Exception($data->getMessage(),$data->getCode());
+                        throw new Exception($data->getMessage(),is_string($data->getCode()) ? (int)$data->getCode() : $data->getCode());
                     }else{
                         return back()->with('success',config('app.message_update'));
                     }

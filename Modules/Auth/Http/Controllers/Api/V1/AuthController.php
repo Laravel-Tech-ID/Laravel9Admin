@@ -46,7 +46,7 @@ class AuthController extends Controller
                 return Response::true(data: $data);
             }else{
                 if(Functions::exception($data)){
-                    throw new Exception($data->getMessage(),$data->getCode());
+                    throw new Exception($data->getMessage(),is_string($data->getCode()) ? (int)$data->getCode() : $data->getCode());
                 }else{
                     throw new Exception("",404);
                 }    
@@ -73,7 +73,7 @@ class AuthController extends Controller
         try{
             $result = auth('api')->logout();
             if(Functions::exception($result)){
-                throw new Exception($data->getMessage(),$data->getCode());
+                throw new Exception($data->getMessage(),is_string($data->getCode()) ? (int)$data->getCode() : $data->getCode());
             }else{
                 return Response::true();
             }
@@ -98,7 +98,7 @@ class AuthController extends Controller
         try{
             $result = $this->respondWithToken(auth('api')->refresh());
             if(Functions::exception($result)){
-                throw new Exception($data->getMessage(),$data->getCode());
+                throw new Exception($data->getMessage(),is_string($data->getCode()) ? (int)$data->getCode() : $data->getCode());
             }else{
                 return Response::true(data: $result->original);
             }    

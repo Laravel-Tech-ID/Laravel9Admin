@@ -61,7 +61,7 @@ class RoleAccessController extends Controller
         try{
             $data = $service->assign($role, $access);
             if(Functions::exception($data)){
-                throw new Exception($data->getMessage(),$data->getCode());
+                throw new Exception($data->getMessage(),is_string($data->getCode()) ? (int)$data->getCode() : $data->getCode());
             }else{
                 return back()->with('success', config('app.message_success'));            
             }
@@ -75,7 +75,7 @@ class RoleAccessController extends Controller
         try{
             $data = $service->assign_selected($request->selected, $role);
             if(Functions::exception($data)){
-                throw new Exception($data->getMessage(),$data->getCode());
+                throw new Exception($data->getMessage(),is_string($data->getCode()) ? (int)$data->getCode() : $data->getCode());
             }else{
                 return back()->with('success', config('app.message_success'));            
             }
@@ -89,7 +89,7 @@ class RoleAccessController extends Controller
         try{
             $data = $service->revoke_selected($request->selected, $role);
             if(Functions::exception($data)){
-                throw new Exception($data->getMessage(),$data->getCode());
+                throw new Exception($data->getMessage(),is_string($data->getCode()) ? (int)$data->getCode() : $data->getCode());
             }else{
                 return back()->with('success', config('app.message_success'));            
             }

@@ -100,7 +100,7 @@ class UserController extends Controller
                 try{
                     $data = $service->store($request->all());
                     if(Functions::exception($data)){
-                        throw new Exception($data->getMessage(),$data->getCode());
+                        throw new Exception($data->getMessage(),is_string($data->getCode()) ? (int)$data->getCode() : $data->getCode());
                     }else{
                         return redirect(route('admin.v1.access.user.index'))->with('success',config('app.message_store'));
                     }
@@ -125,7 +125,7 @@ class UserController extends Controller
             $data = $datas['data'];
             $roles = $datas['roles'];
             if(Functions::exception($data)){
-                throw new Exception($data->getMessage(),$data->getCode());
+                throw new Exception($data->getMessage(),is_string($data->getCode()) ? (int)$data->getCode() : $data->getCode());
             }else{
                 return view('access::'.config('app.be_view').'.user.user_edit', compact(
                     'data',
@@ -161,7 +161,7 @@ class UserController extends Controller
                 try{
                     $data = $service->update($request->all(), $id);
                     if(Functions::exception($data)){
-                        throw new Exception($data->getMessage(),$data->getCode());
+                        throw new Exception($data->getMessage(),is_string($data->getCode()) ? (int)$data->getCode() : $data->getCode());
                     }else{
                         return redirect(route('admin.v1.access.user.index'))->with('success',config('app.message_update'));
                     }
@@ -184,7 +184,7 @@ class UserController extends Controller
         try{
             $data = $service->destroy($id);
             if(Functions::exception($data)){
-                throw new Exception($data->getMessage(),$data->getCode());
+                throw new Exception($data->getMessage(),is_string($data->getCode()) ? (int)$data->getCode() : $data->getCode());
             }else{
                 return back()->with('success',config('app.message_destroy'));
             }
