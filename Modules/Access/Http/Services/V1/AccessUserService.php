@@ -70,7 +70,7 @@ class AccessUserService
         try{
             $result = Role::all();
             if(Functions::exception($result)){
-                throw new Exception($result->getMessage(),$result->getCode());
+                throw new Exception($result->getMessage(),is_string($result->getCode()) ? (int)$result->getCode() : $result->getCode());
             }else{
                 DB::commit();
                 return $result;
@@ -118,7 +118,7 @@ class AccessUserService
             $result = User::create($new_array);
             $result_assign = $result->assignRole($role);
             if(Functions::exception($result)){
-                throw new Exception($result->getMessage(),$result->getCode());
+                throw new Exception($result->getMessage(),is_string($result->getCode()) ? (int)$result->getCode() : $result->getCode());
             }else{
                 DB::commit();
                 return $result;
@@ -170,7 +170,7 @@ class AccessUserService
    
             $result = User::find($id);
             if(Functions::exception($result)){
-                throw new Exception($result->getMessage(),$result->getCode());
+                throw new Exception($result->getMessage(),is_string($result->getCode()) ? (int)$result->getCode() : $result->getCode());
             }else{
 
                 if($picture){
@@ -220,7 +220,7 @@ class AccessUserService
         try{
             $result = User::find($id);
             if(Functions::exception($result)){
-                throw new Exception($result->getMessage(),$result->getCode());
+                throw new Exception($result->getMessage(),is_string($result->getCode()) ? (int)$result->getCode() : $result->getCode());
             }else{
                 $result1 = $result->delete();
                 if(Functions::exception($result1)){

@@ -34,7 +34,7 @@ class RoleController extends Controller
             );
 
             if(Functions::exception($result)){
-                throw new Exception($result->getMessage(),$result->getCode());
+                throw new Exception($result->getMessage(),is_string($result->getCode()) ? (int)$result->getCode() : $result->getCode());
             }else{
                 $datas = $result['datas'];
                 return view('access::'.config('app.be_view').'.role.role_index',compact(

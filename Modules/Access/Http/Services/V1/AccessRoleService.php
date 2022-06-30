@@ -62,7 +62,7 @@ class AccessRoleService
 
             $result = Role::create($data);
             if(Functions::exception($result)){
-                throw new Exception($result->getMessage(),$result->getCode());
+                throw new Exception($result->getMessage(),is_string($result->getCode()) ? (int)$result->getCode() : $result->getCode());
             }else{
                 DB::commit();
                 return $result;
@@ -92,11 +92,11 @@ class AccessRoleService
         try{
             $result = Role::find($id);
             if(Functions::exception($result)){
-                throw new Exception($result->getMessage(),$result->getCode());
+                throw new Exception($result->getMessage(),is_string($result->getCode()) ? (int)$result->getCode() : $result->getCode());
             }else{
                 $result = $result->update($data);
                 if(Functions::exception($result)){
-                    throw new Exception($result->getMessage(),$result->getCode());
+                    throw new Exception($result->getMessage(),is_string($result->getCode()) ? (int)$result->getCode() : $result->getCode());
                 }else{
                     DB::commit();
                     return $result;
@@ -131,11 +131,11 @@ class AccessRoleService
         try{
             $result = Role::find($id);
             if(Functions::exception($result)){
-                throw new Exception($result->getMessage(),$result->getCode());
+                throw new Exception($result->getMessage(),is_string($result->getCode()) ? (int)$result->getCode() : $result->getCode());
             }else{
                 $result = $result->delete();
                 if(Functions::exception($result)){
-                    throw new Exception($result->getMessage(),$result->getCode());
+                    throw new Exception($result->getMessage(),is_string($result->getCode()) ? (int)$result->getCode() : $result->getCode());
                 }else{
                     DB::commit();
                     return $result;
