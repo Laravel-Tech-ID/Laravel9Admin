@@ -285,7 +285,7 @@ class Response{
 
     static function response($message = null,$error_code = null,$data = null,$code = null){
         $arrs = [
-            'success' => self::$messages[$code]['status'],
+            'status' => self::$messages[$code]['status'],
             'message' => ($message == null) ? self::$messages[$code]['message'] : $message,
         ];
 
@@ -302,7 +302,7 @@ class Response{
 
     static function true($message = null,$data = null,$code = 200){
         $arrs = [
-            'success' => true,
+            'status' => true,
             'message' => ($message == null) ? self::$messages[$code]['message'] : $message,
         ];
 
@@ -316,7 +316,7 @@ class Response{
     static function false($message = null,$error_code = null,$data = null,$code = 500){
 
         $arrs = [
-            'success' => false,
+            'status' => false,
             'message' => ($message == null) ? self::$messages[$code]['message'] : $message,
         ];
 
